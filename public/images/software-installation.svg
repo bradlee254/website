@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Software Installation</title>
+  <desc id="desc">Illustration of software installation on a computer</desc>
+  <rect width="640" height="480" fill="#0B7A19"/>
+  <rect x="120" y="80" width="400" height="260" rx="16" fill="#FFFFFF"/>
+  <rect x="145" y="105" width="350" height="210" rx="8" fill="#065A14" opacity="0.12"/>
+  <rect x="175" y="140" width="120" height="14" rx="7" fill="#1F2937" opacity="0.7"/>
+  <rect x="175" y="170" width="200" height="14" rx="7" fill="#1F2937" opacity="0.4"/>
+  <rect x="175" y="200" width="160" height="14" rx="7" fill="#1F2937" opacity="0.4"/>
+  <circle cx="440" cy="180" r="44" fill="#43C229"/>
+  <path d="M440 152 L440 208 M416 180 L464 180" stroke="#065A14" stroke-width="10" stroke-linecap="round"/>
+  <rect x="120" y="340" width="400" height="16" rx="8" fill="#FFFFFF"/>
+  <circle cx="145" cy="348" r="8" fill="#43C229"/>
+  <rect x="165" y="342" width="180" height="12" rx="6" fill="#43C229"/>
+</svg>

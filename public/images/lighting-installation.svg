@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Lighting Installation</title>
+  <desc id="desc">Illustration of indoor and outdoor lighting installation</desc>
+  <rect width="640" height="480" fill="#1F2937"/>
+  <circle cx="500" cy="90" r="130" fill="#43C229" opacity="0.12"/>
+  <rect x="90" y="140" width="460" height="220" rx="16" fill="#FFFFFF"/>
+  <circle cx="320" cy="190" r="34" fill="#43C229"/>
+  <path d="M320 156 L320 172 M320 208 L320 224 M286 190 L302 190 M338 190 L354 190 M295 166 L307 178 M333 202 L345 214 M295 214 L307 202 M333 178 L345 166" stroke="#43C229" stroke-width="6" stroke-linecap="round"/>
+  <path d="M320 224 L320 300" stroke="#1F2937" stroke-width="8"/>
+  <path d="M280 300 L360 300 L320 360 Z" fill="#43C229"/>
+  <rect x="130" y="330" width="60" height="10" rx="5" fill="#43C229"/>
+  <rect x="450" y="330" width="60" height="10" rx="5" fill="#43C229"/>
+  <path d="M130 140 L130 380 M510 140 L510 380" stroke="#43C229" stroke-width="10" stroke-linecap="round"/>
+</svg>

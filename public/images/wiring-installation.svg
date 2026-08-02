@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Wiring Installation</title>
+  <desc id="desc">Illustration of professional electrical wiring installation</desc>
+  <rect width="640" height="480" fill="#0B7A19"/>
+  <rect x="80" y="120" width="480" height="260" rx="16" fill="#FFFFFF"/>
+  <rect x="110" y="150" width="420" height="200" rx="8" fill="#065A14" opacity="0.15"/>
+  <path d="M120 380 L520 380 M120 380 L120 320 M180 380 L180 300 M240 380 L240 320 M300 380 L300 300 M360 380 L360 320 M420 380 L420 300 M480 380 L480 320 L520 380 Z" stroke="#43C229" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="160" cy="200" r="10" fill="#43C229"/>
+  <path d="M170 210 L260 260" stroke="#43C229" stroke-width="8" stroke-linecap="round"/>
+  <rect x="280" y="250" width="90" height="14" rx="7" fill="#43C229"/>
+  <rect x="300" y="180" width="120" height="14" rx="7" fill="#F5F5F5"/>
+  <circle cx="360" cy="150" r="14" fill="#43C229"/>
+</svg>

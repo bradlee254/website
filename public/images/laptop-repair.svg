@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">Laptop Repair</title>
+  <desc id="desc">Illustration of a laptop repair in progress</desc>
+  <rect width="640" height="480" fill="#F5F5F5"/>
+  <rect x="140" y="120" width="360" height="240" rx="14" fill="#1F2937"/>
+  <rect x="165" y="145" width="310" height="190" rx="6" fill="#0B7A19" opacity="0.15"/>
+  <rect x="120" y="360" width="400" height="14" rx="7" fill="#0B7A19"/>
+  <path d="M330 150 L330 340 M420 150 L420 340" stroke="#43C229" stroke-width="8" stroke-dasharray="16 12"/>
+  <circle cx="330" cy="240" r="22" fill="#43C229"/>
+  <circle cx="330" cy="240" r="12" fill="#065A14"/>
+  <circle cx="420" cy="240" r="22" fill="#43C229"/>
+  <circle cx="420" cy="240" r="12" fill="#065A14"/>
+  <rect x="520" y="200" width="60" height="10" rx="5" fill="#43C229"/>
+</svg>
