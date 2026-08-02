@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="520" viewBox="0 0 640 520" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">LEE team illustration</title>
+  <desc id="desc">Illustration of a friendly technician ready to help</desc>
+  <rect width="640" height="520" fill="#F5F5F5"/>
+  <circle cx="320" cy="260" r="190" fill="#43C229" opacity="0.1"/>
+  <circle cx="320" cy="240" r="60" fill="#065A14"/>
+  <path d="M320 300 C260 300 220 340 220 420 L420 420 C420 340 380 300 320 300 Z" fill="#0B7A19"/>
+  <rect x="190" y="240" width="18" height="150" rx="6" fill="#1F2937"/>
+  <rect x="430" y="240" width="18" height="150" rx="6" fill="#1F2937"/>
+  <rect x="180" y="120" width="120" height="80" rx="10" fill="#43C229"/>
+  <rect x="200" y="140" width="80" height="10" rx="5" fill="#FFFFFF" opacity="0.7"/>
+  <rect x="200" y="160" width="60" height="10" rx="5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="340" cy="130" r="12" fill="#065A14"/>
+  <path d="M340 118 L340 142 M328 130 L352 130" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+  <rect x="150" y="440" width="340" height="8" rx="4" fill="#065A14" opacity="0.3"/>
+  <circle cx="560" cy="120" r="40" fill="#43C229" opacity="0.3"/>
+</svg>
