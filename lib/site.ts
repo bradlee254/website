@@ -19,7 +19,7 @@ export const site = {
   mapLink: "https://maps.google.com/?q=Nairobi%2C%20Kenya",
 } as const;
 
-export const assetBase = "/website";
+export const assetBase = process.env.NEXT_PUBLIC_ASSET_BASE ?? "";
 
 export function asset(src: string): string {
   return `${assetBase}${src}`;
