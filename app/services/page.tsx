@@ -46,7 +46,7 @@ export default function ServicesPage() {
               </Reveal>
             ))}
             <Reveal delay={electricalServices.length * 80}>
-              <div className="flex h-full flex-col items-start justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary p-6 text-white">
+              <div className="flex h-full flex-col items-start justify-center rounded-2xl bg-gradient-to-br from-primary to-secondary p-6 text-white sm:col-span-2 lg:col-span-3">
                 <Cable className="h-8 w-8" aria-hidden="true" />
                 <h3 className="mt-3 font-heading text-lg font-semibold">
                   Need Electrical Help?

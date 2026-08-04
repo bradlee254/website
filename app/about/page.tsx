@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ArrowRight, CheckCircle2, Target, Eye, HeartHandshake } from "lucide-react";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
-import { site } from "@/lib/site";
+import { site, asset } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -61,7 +61,7 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={150}>
             <Image
-              src="/images/about-team.svg"
+              src={asset("/images/about-team.svg")}
               alt="LEE Electrical and Computer Services team"
               width={640}
               height={520}

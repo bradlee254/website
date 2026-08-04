@@ -6,6 +6,7 @@ const SERVICE_OPTIONS = [
   "Power Outlets & Switches",
   "Fault Finding & Repairs",
   "Safety Inspections",
+  "CCTV Installation",
   "PC & Laptop Repairs",
   "Software Installation",
   "Virus & Malware Removal",

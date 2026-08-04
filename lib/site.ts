@@ -18,3 +18,9 @@ export const site = {
     "https://maps.google.com/maps?q=Nairobi%2C%20Kenya&z=13&output=embed",
   mapLink: "https://maps.google.com/?q=Nairobi%2C%20Kenya",
 } as const;
+
+export const assetBase = "/website";
+
+export function asset(src: string): string {
+  return `${assetBase}${src}`;
+}

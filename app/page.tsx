@@ -11,14 +11,14 @@ import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import TestimonialCard from "@/components/TestimonialCard";
 import { featuredServices, testimonials, whyChooseUs } from "@/lib/data";
-import { site } from "@/lib/site";
+import { asset, site } from "@/lib/site";
 
 export default function Home() {
   return (
     <>
       <section className="relative min-h-[calc(100vh-4rem)] overflow-hidden bg-ink text-white">
         <Image
-          src="/images/photos/electrical-testing.jpg"
+          src={asset("/images/photos/electrical-testing.jpg")}
           alt="Electrical technician testing wiring inside a control panel"
           fill
           preload
@@ -64,7 +64,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={400}>
             <ul className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-white/90">
-              {["Electrical Installation", "Computer Repairs", "Data Recovery", "24/7 Support"].map(
+              {["Electrical Installation", "CCTV Installation", "Computer Repairs", "Data Recovery", "24/7 Support"].map(
                 (item) => (
                   <li key={item} className="flex items-center gap-2">
                     <CheckCircle2
@@ -103,7 +103,7 @@ export default function Home() {
           <Reveal>
             <div className="relative overflow-hidden rounded-lg bg-ink shadow-xl">
               <Image
-                src="/images/photos/panel-installation.jpg"
+                src={asset("/images/photos/panel-installation.jpg")}
                 alt="Electrical and computer technicians at work"
                 width={640}
                 height={520}
@@ -167,7 +167,7 @@ export default function Home() {
             {featuredServices.map((service, i) => {
               const Icon = service.icon;
               return (
-                <Reveal key={service.title} delay={i * 120}>
+                <Reveal key={service.title} delay={i * 120} className={service.fullWidth ? "lg:col-span-2" : ""}>
                   <article className="group grid h-full overflow-hidden rounded-lg border border-black/5 bg-white shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg sm:grid-cols-[0.9fr_1.1fr]">
                     <div className="relative min-h-64">
                       <Image

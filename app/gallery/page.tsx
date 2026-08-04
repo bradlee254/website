@@ -31,11 +31,15 @@ export default function GalleryPage() {
           <Reveal>
             <Suspense
               fallback={
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-flow-dense grid-cols-1 auto-rows-[200px] gap-4 sm:grid-cols-2 sm:auto-rows-[220px] lg:grid-cols-3">
                   {Array.from({ length: 6 }).map((_, i) => (
                     <div
                       key={i}
-                      className="aspect-[4/3] w-full animate-pulse rounded-2xl bg-black/10"
+                      className={
+                        i % 6 === 0
+                          ? "col-span-1 animate-pulse rounded-2xl bg-black/10 sm:col-span-2 sm:row-span-2"
+                          : "col-span-1 animate-pulse rounded-2xl bg-black/10"
+                      }
                     />
                   ))}
                 </div>

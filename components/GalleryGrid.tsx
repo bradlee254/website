@@ -10,6 +10,15 @@ type Filter = "All" | "Electrical" | "Computer";
 
 const FILTERS: Filter[] = ["All", "Electrical", "Computer"];
 
+const BENTO_SPANS = [
+  "sm:col-span-2 sm:row-span-2",
+  "",
+  "sm:row-span-2",
+  "",
+  "sm:col-span-2",
+  "",
+];
+
 export default function GalleryGrid({
   showAll = true,
 }: {
@@ -93,21 +102,24 @@ export default function GalleryGrid({
         </div>
       )}
 
-      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="grid grid-flow-dense grid-cols-1 auto-rows-[200px] gap-4 sm:grid-cols-2 sm:auto-rows-[220px] lg:grid-cols-3">
         {visible.map((item, i) => (
-          <li key={item.src}>
+          <li
+            key={item.id}
+            className={BENTO_SPANS[i % BENTO_SPANS.length]}
+          >
             <button
               type="button"
               onClick={() => setLightbox(i)}
               aria-label={`Enlarge image: ${item.label}`}
-              className="group relative block w-full overflow-hidden rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="group relative block h-full w-full overflow-hidden rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               <Image
                 src={item.src}
                 alt={item.alt}
-                width={640}
-                height={480}
-                className="aspect-4/3 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                fill
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <span className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent opacity-80" />
               <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-primary">

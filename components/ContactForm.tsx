@@ -170,6 +170,7 @@ export default function ContactForm() {
             <option value="Power Outlets & Switches">Power Outlets & Switches</option>
             <option value="Fault Finding & Repairs">Fault Finding & Repairs</option>
             <option value="Safety Inspections">Safety Inspections</option>
+            <option value="CCTV Installation">CCTV Installation</option>
             <option value="PC & Laptop Repairs">PC & Laptop Repairs</option>
             <option value="Software Installation">Software Installation</option>
             <option value="Virus & Malware Removal">Virus & Malware Removal</option>

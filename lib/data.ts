@@ -1,6 +1,8 @@
 import type { LucideIcon } from "lucide-react";
+import { asset } from "@/lib/site";
 import {
   Cable,
+  Cctv,
   Cpu,
   HardDrive,
   Lightbulb,
@@ -43,6 +45,11 @@ export const electricalServices: Service[] = [
     description: "Comprehensive electrical safety assessments.",
     icon: ShieldCheck,
   },
+  {
+    title: "CCTV Installation",
+    description: "Supply and installation of security cameras for homes and businesses.",
+    icon: Cctv,
+  },
 ];
 
 export const computerServices: Service[] = [
@@ -78,13 +85,14 @@ export const featuredServices = [
     title: "Electrical Services",
     description:
       "Wiring, lighting, outlets, fault finding and safety inspections for homes and businesses.",
-    image: "/images/photos/electrical-testing.jpg",
+    image: asset("/images/photos/electrical-testing.jpg"),
     items: [
       "Wiring & Installation",
       "Lighting Solutions",
       "Power Outlets & Switches",
       "Fault Finding & Repairs",
       "Safety Inspections",
+      "CCTV Installation",
     ],
     href: "/services#electrical",
     icon: Lightbulb,
@@ -94,7 +102,7 @@ export const featuredServices = [
     title: "Computer Services",
     description:
       "Repairs, software installation, virus removal, upgrades and data recovery.",
-    image: "/images/photos/laptop-repair.jpg",
+    image: asset("/images/photos/laptop-repair.jpg"),
     items: [
       "PC & Laptop Repairs",
       "Software Installation",
@@ -105,6 +113,23 @@ export const featuredServices = [
     href: "/services#computer",
     icon: Cpu,
     accent: "bg-secondary",
+  },
+  {
+    title: "CCTV Installation",
+    description:
+      "Security camera supply and installation for homes and businesses — clear viewing, reliable recording and remote access.",
+    image: asset("/images/photos/panel-installation.jpg"),
+    items: [
+      "Home & Office CCTV Systems",
+      "Camera Supply & Installation",
+      "Remote Viewing Setup",
+      "Recording & Storage Setup",
+      "System Maintenance & Support",
+    ],
+    href: "/services#electrical",
+    icon: Cctv,
+    accent: "bg-accent",
+    fullWidth: true,
   },
 ];
 
@@ -155,37 +180,43 @@ export const testimonials = [
 
 export const galleryItems = [
   {
-    src: "/images/photos/panel-installation.jpg",
+    id: "wiring-installation",
+    src: asset("/images/photos/panel-installation.jpg"),
     alt: "Professional electrical wiring installation",
     category: "Electrical",
     label: "Wiring Installation",
   },
   {
-    src: "/images/photos/electrical-testing.jpg",
+    id: "lighting-installation",
+    src: asset("/images/photos/electrical-testing.jpg"),
     alt: "Indoor lighting installation",
     category: "Electrical",
     label: "Lighting Installation",
   },
   {
-    src: "/images/photos/fuse-box-service.jpg",
+    id: "distribution-board",
+    src: asset("/images/photos/fuse-box-service.jpg"),
     alt: "Electrical distribution board",
     category: "Electrical",
     label: "Distribution Board",
   },
   {
-    src: "/images/photos/laptop-repair.jpg",
+    id: "laptop-repair",
+    src: asset("/images/photos/laptop-repair.jpg"),
     alt: "Laptop repair in progress",
     category: "Computer",
     label: "Laptop Repair",
   },
   {
-    src: "/images/photos/laptop-repair.jpg",
+    id: "desktop-repair",
+    src: asset("/images/photos/laptop-repair.jpg"),
     alt: "Desktop computer repair",
     category: "Computer",
     label: "Desktop Repair",
   },
   {
-    src: "/images/photos/electrical-testing.jpg",
+    id: "software-installation",
+    src: asset("/images/photos/electrical-testing.jpg"),
     alt: "Software installation",
     category: "Computer",
     label: "Software Installation",
