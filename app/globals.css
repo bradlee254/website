@@ -8,8 +8,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Montserrat", "Segoe UI", ui-sans-serif, system-ui, sans-serif;
 
   --color-primary: #0b7a19;
   --color-primary-dark: #065a14;
