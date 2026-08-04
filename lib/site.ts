@@ -1,7 +1,8 @@
 export const site = {
   name: "LEE Electrical and Computer Services",
   shortName: "LEE Electrical & Computer",
-  tagline: "Reliable, Affordable, and Professional Solutions for Homes and Businesses.",
+  tagline:
+    "Reliable, Affordable, and Professional Solutions for Homes and Businesses.",
   url: "https://lee-electrical.example.com",
   phone: "+254 708 657 832",
   phoneHref: "tel:+254708657832",
@@ -19,7 +20,8 @@ export const site = {
   mapLink: "https://maps.google.com/?q=Nairobi%2C%20Kenya",
 } as const;
 
-export const assetBase = process.env.NEXT_PUBLIC_ASSET_BASE?.replace(/\/$/, "") ?? "";
+export const assetBase =
+  process.env.NEXT_PUBLIC_ASSET_BASE?.replace(/\/$/, "") ?? "";
 
 export function asset(src: string): string {
   const normalizedSrc = src.startsWith("/") ? src : `/${src}`;
