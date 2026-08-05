@@ -4,9 +4,9 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { CheckCircle2, Loader2, Send } from "lucide-react";
 
-const EMAILJS_SERVICE_ID = "service_w1xn9ar";
-const EMAILJS_TEMPLATE_ID = "template_m7ti8pg";
-const EMAILJS_PUBLIC_KEY = "ZhNPdVIAFBzYHXV4Q";
+const EMAILJS_SERVICE_ID = "service_50qapou";
+const EMAILJS_TEMPLATE_ID = "template_en1c078";
+const EMAILJS_PUBLIC_KEY = "-BsDadyzu1JUsZYdR";
 
 const initialForm = {
   name: "",
@@ -40,6 +40,8 @@ export default function ContactForm() {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
+          title: "Lee Electronics",
+          name: form.name,
           from_name: form.name,
           from_email: form.email,
           reply_to: form.email,
