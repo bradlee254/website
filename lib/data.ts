@@ -1,7 +1,9 @@
 import type { LucideIcon } from "lucide-react";
 import { asset } from "@/lib/site";
 import {
+  Building2,
   Cable,
+  Camera,
   Cctv,
   Cpu,
   HardDrive,
@@ -45,10 +47,33 @@ export const electricalServices: Service[] = [
     description: "Comprehensive electrical safety assessments.",
     icon: ShieldCheck,
   },
+];
+
+export const cctvServices: Service[] = [
   {
-    title: "CCTV Installation",
-    description: "Supply and installation of security cameras for homes and businesses.",
-    icon: Cctv,
+    title: "Home & Office CCTV Systems",
+    description: "Complete camera systems tailored to residential and commercial properties.",
+    icon: Building2,
+  },
+  {
+    title: "Camera Supply & Installation",
+    description: "Supply and professional installation of HD security cameras.",
+    icon: Camera,
+  },
+  {
+    title: "Remote Viewing Setup",
+    description: "Watch live footage from anywhere using your phone or computer.",
+    icon: Smartphone,
+  },
+  {
+    title: "Recording & Storage Setup",
+    description: "Reliable local and cloud recording so footage is there when you need it.",
+    icon: HardDrive,
+  },
+  {
+    title: "System Maintenance & Support",
+    description: "Ongoing checks, repairs and upgrades to keep your system online.",
+    icon: Wrench,
   },
 ];
 
@@ -118,7 +143,7 @@ export const featuredServices = [
     title: "CCTV Installation",
     description:
       "Security camera supply and installation for homes and businesses — clear viewing, reliable recording and remote access.",
-    image: asset("/images/photos/panel-installation.jpg"),
+    image: asset("/images/photos/panel.png"),
     items: [
       "Home & Office CCTV Systems",
       "Camera Supply & Installation",
@@ -126,7 +151,7 @@ export const featuredServices = [
       "Recording & Storage Setup",
       "System Maintenance & Support",
     ],
-    href: "/services#electrical",
+    href: "/services#cctv",
     icon: Cctv,
     accent: "bg-accent",
     fullWidth: true,
@@ -181,7 +206,7 @@ export const testimonials = [
 export const galleryItems = [
   {
     id: "wiring-installation",
-    src: asset("/images/photos/panel-installation.jpg"),
+    src: asset("/images/photos/panel.png"),
     alt: "Professional electrical wiring installation",
     category: "Electrical",
     label: "Wiring Installation",
@@ -195,7 +220,7 @@ export const galleryItems = [
   },
   {
     id: "distribution-board",
-    src: asset("/images/photos/fuse-box-service.jpg"),
+    src: asset("/images/photos/fuse.png"),
     alt: "Electrical distribution board",
     category: "Electrical",
     label: "Distribution Board",

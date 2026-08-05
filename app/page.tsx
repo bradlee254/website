@@ -103,7 +103,7 @@ export default function Home() {
           <Reveal>
             <div className="relative overflow-hidden rounded-lg bg-ink shadow-xl">
               <Image
-                src={asset("/images/photos/panel-installation.jpg")}
+                src={asset("/images/photos/panel.png")}
                 alt="Electrical and computer technicians at work"
                 width={640}
                 height={520}
