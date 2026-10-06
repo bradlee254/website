@@ -7,11 +7,15 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  
+    devIndicators: false,
+  
 };
 
 if (assetBase) {
   nextConfig.assetPrefix = assetBase;
   nextConfig.basePath = assetBase;
+
 }
 
 export default nextConfig;

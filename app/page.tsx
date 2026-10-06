@@ -1,160 +1,163 @@
-import Link from "next/link";
 import Image from "next/image";
-import {
-  ArrowRight,
-  CheckCircle2,
-  Phone,
-  Sparkles,
-  Wrench,
-} from "lucide-react";
-import SectionHeading from "@/components/SectionHeading";
+import { Check, Phone } from "lucide-react";
+import Button, { ArrowIcon, TextLink } from "@/components/Button";
+import CallToAction from "@/components/CallToAction";
+import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/SectionHeading";
+import SplitText from "@/components/SplitText";
 import TestimonialCard from "@/components/TestimonialCard";
 import { featuredServices, testimonials, whyChooseUs } from "@/lib/data";
 import { asset, site } from "@/lib/site";
 
+const stats = [
+  ["10+", "Years Experience"],
+  ["24/7", "Emergency Support"],
+  ["2-in-1", "Electrical & IT Expertise"],
+  ["100%", "Customer Satisfaction Focus"],
+];
+
+const heroServices = [
+  "Electrical Installation",
+  "CCTV Installation",
+  "Computer Repairs",
+  "Data Recovery",
+  "24/7 Support",
+];
+
 export default function Home() {
   return (
     <>
-      <section className="relative min-h-[calc(100vh-4rem)] overflow-hidden bg-ink text-white">
-        <Image
-          src={asset("/images/photos/electrical-testing.jpg")}
-          alt="Electrical technician testing wiring inside a control panel"
-          fill
-          preload
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-ink/70" />
-        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink to-transparent" />
-        <div className="container-site relative flex min-h-[calc(100vh-4rem)] flex-col justify-center py-16 sm:py-20">
-          <Reveal>
-            <span className="inline-flex w-fit items-center gap-2 rounded-full bg-white/12 px-4 py-1.5 text-sm font-medium text-white ring-1 ring-white/20 backdrop-blur">
-              <Sparkles className="h-4 w-4 text-secondary" aria-hidden="true" />
+      <section className="tone-dark overflow-hidden bg-ink text-paper">
+        <div className="container-site grid gap-x-12 gap-y-12 pb-14 pt-12 sm:pt-16 lg:grid-cols-12 lg:items-center lg:pb-20 lg:pt-20">
+          <div className="lg:col-span-7">
+            <p className="type-label animate-fade-up flex items-center gap-3 text-secondary">
+              <span aria-hidden="true" className="h-px w-8 bg-current" />
               Trusted Electrical & Computer Experts
-            </span>
-          </Reveal>
-          <Reveal delay={100}>
-            <h1 className="mt-6 max-w-4xl font-heading text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
-              Professional electrical and computer support for homes and businesses
-            </h1>
-          </Reveal>
-          <Reveal delay={200}>
-            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl">
-              {site.tagline}
             </p>
-          </Reveal>
-          <Reveal delay={300}>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-secondary px-7 py-3.5 font-heading text-base font-semibold text-ink shadow-lg transition-colors hover:bg-white"
-              >
-                Get a Quote
-                <ArrowRight className="h-5 w-5" aria-hidden="true" />
-              </Link>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/50 px-7 py-3.5 font-heading text-base font-semibold text-white transition-colors hover:bg-white/10"
-              >
-                <Phone className="h-5 w-5" aria-hidden="true" />
-                Contact Us
-              </Link>
+            <h1 className="type-display mt-6 max-w-[15ch]">
+              <SplitText text="Electrical and computer support for homes and businesses." />
+            </h1>
+            <div
+              className="animate-fade-up"
+              style={{ "--delay": "500ms" } as React.CSSProperties}
+            >
+              <p className="type-lead mt-7 max-w-xl text-paper/70">
+                {site.tagline}
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <Button href="/contact">
+                  Get a free quote
+                  <ArrowIcon />
+                </Button>
+                <Button href={site.phoneHref} variant="outline">
+                  <Phone className="h-4 w-4" aria-hidden="true" />
+                  {site.phone}
+                </Button>
+              </div>
             </div>
-          </Reveal>
-          <Reveal delay={400}>
-            <ul className="mt-14 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-white/90">
-              {["Electrical Installation", "CCTV Installation", "Computer Repairs", "Data Recovery", "24/7 Support"].map(
-                (item) => (
-                  <li key={item} className="flex items-center gap-2">
-                    <CheckCircle2
-                      className="h-4 w-4 text-secondary"
+          </div>
+
+          <div className="animate-clip-in lg:col-span-5">
+            <Parallax className="aspect-[5/4] rounded-sm bg-ink-soft sm:aspect-[16/10] lg:aspect-[4/5]">
+              <Image
+                src={asset("/images/photos/panel.png")}
+                alt="LEE technician in uniform working on an electrical distribution board"
+                fill
+                preload
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover object-[50%_22%]"
+              />
+            </Parallax>
+          </div>
+        </div>
+
+        <div className="border-t border-paper/12">
+          <ul className="container-site flex flex-wrap gap-x-8 gap-y-2 py-5 text-[0.9375rem] text-paper/75">
+            {heroServices.map((item) => (
+              <li key={item} className="flex items-center gap-2.5">
+                <span
+                  aria-hidden="true"
+                  className="h-1.5 w-1.5 rounded-full bg-secondary"
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section id="about" className="section-y">
+        <div className="container-site">
+          <div className="grid gap-x-12 gap-y-12 lg:grid-cols-12">
+            <Reveal className="lg:col-span-7">
+              <SectionHeading
+                eyebrow="About Our Company"
+                title="Quality Work, Delivered with Customer Satisfaction"
+              />
+              <p className="type-lead mt-7 max-w-xl text-muted">
+                {site.name} provides professional electrical installations,
+                computer repairs, software support, and maintenance services.
+                Our goal is delivering quality work with complete customer
+                satisfaction — every time.
+              </p>
+              <ul className="mt-9 grid max-w-xl gap-x-8 sm:grid-cols-2">
+                {[
+                  "Licensed, experienced technicians",
+                  "Fast response and reliable service",
+                  "Affordable, transparent pricing",
+                  "Safe, industry-standard workmanship",
+                ].map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 border-t border-line py-4 text-base text-ink"
+                  >
+                    <Check
+                      className="mt-1 h-4 w-4 shrink-0 text-primary"
                       aria-hidden="true"
                     />
                     {item}
                   </li>
-                ),
-              )}
-            </ul>
-          </Reveal>
+                ))}
+              </ul>
+              <TextLink href="/about" className="mt-6 text-primary">
+                Learn more about us
+              </TextLink>
+            </Reveal>
+
+            <Reveal variant="clip" delay={120} className="lg:col-span-5">
+              <Parallax className="aspect-[4/5] rounded-sm bg-surface sm:aspect-[16/10] lg:aspect-[4/5]">
+                <Image
+                  src={asset("/images/photos/fuse.png")}
+                  alt="LEE electrician servicing a distribution board with an insulated screwdriver"
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover object-top"
+                />
+              </Parallax>
+            </Reveal>
+          </div>
+
+          <dl className="mt-16 grid grid-cols-2 border-t border-line lg:mt-24 lg:grid-cols-4">
+            {stats.map(([value, label], i) => (
+              <Reveal
+                key={label}
+                delay={i * 80}
+                className="border-b border-line py-7 pr-4 lg:border-b-0 lg:pb-0"
+              >
+                <div className="flex flex-col-reverse gap-2">
+                  <dt className="text-[0.9375rem] text-muted">{label}</dt>
+                  <dd className="text-[clamp(2.25rem,4.5vw,3.75rem)] font-semibold leading-none tracking-tight text-ink [font-stretch:108%]">
+                    {value}
+                  </dd>
+                </div>
+              </Reveal>
+            ))}
+          </dl>
         </div>
       </section>
 
-      <section id="about" className="bg-ink py-12 text-white sm:py-14">
-        <div className="container-site grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {[
-            ["10+", "Years Experience"],
-            ["24/7", "Emergency Support"],
-            ["2-in-1", "Electrical & IT Expertise"],
-            ["100%", "Customer Satisfaction Focus"],
-          ].map(([value, label]) => (
-            <div key={label} className="border-l border-white/15 pl-5">
-              <p className="font-heading text-3xl font-bold text-secondary">
-                {value}
-              </p>
-              <p className="mt-1 text-sm text-white/70">{label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="bg-white py-20 sm:py-24">
-        <div className="container-site grid items-center gap-12 lg:grid-cols-2">
-          <Reveal>
-            <div className="relative overflow-hidden rounded-lg bg-ink shadow-xl">
-              <Image
-                src={asset("/images/photos/panel.png")}
-                alt="Electrical and computer technicians at work"
-                width={640}
-                height={520}
-                className="aspect-[5/4] w-full object-cover opacity-95"
-              />
-              <div className="absolute bottom-4 right-4 hidden rounded-lg bg-white p-5 text-ink shadow-lg sm:block">
-                <p className="font-heading text-3xl font-bold">10+</p>
-                <p className="text-sm text-ink/65">Years Experience</p>
-              </div>
-            </div>
-          </Reveal>
-          <Reveal delay={150}>
-            <SectionHeading
-              align="left"
-              eyebrow="About Our Company"
-              title="Quality Work, Delivered with Customer Satisfaction"
-            />
-            <p className="mt-5 leading-relaxed text-muted">
-              {site.name} provides professional electrical installations,
-              computer repairs, software support, and maintenance services. Our
-              goal is delivering quality work with complete customer
-              satisfaction — every time.
-            </p>
-            <ul className="mt-7 space-y-3">
-              {[
-                "Licensed, experienced technicians",
-                "Fast response and reliable service",
-                "Affordable, transparent pricing",
-                "Safe, industry-standard workmanship",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3">
-                  <CheckCircle2
-                    className="mt-0.5 h-5 w-5 shrink-0 text-secondary"
-                    aria-hidden="true"
-                  />
-                  <span className="text-muted">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/about"
-              className="mt-8 inline-flex items-center gap-2 font-heading text-sm font-semibold text-primary transition-colors hover:text-primary-dark"
-            >
-              Learn More About Us
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="bg-surface py-20 sm:py-24">
+      <section className="section-y bg-surface">
         <div className="container-site">
           <Reveal>
             <SectionHeading
@@ -163,155 +166,117 @@ export default function Home() {
               description="Professional solutions for every electrical and computer need — from wiring your home to recovering lost data."
             />
           </Reveal>
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            {featuredServices.map((service, i) => {
-              const Icon = service.icon;
-              return (
-                <Reveal key={service.title} delay={i * 120} className={service.fullWidth ? "lg:col-span-2" : ""}>
-                  <article className="group grid h-full overflow-hidden rounded-lg border border-black/5 bg-white shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg sm:grid-cols-[0.9fr_1.1fr]">
-                    <div className="relative min-h-64">
-                      <Image
-                        src={service.image}
-                        alt={`${service.title} in progress`}
-                        fill
-                        sizes="(min-width: 1024px) 40vw, 100vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                    </div>
-                    <div className="flex flex-col p-7">
-                      <span
-                        className={`flex h-12 w-12 items-center justify-center rounded-lg ${service.accent} text-white`}
+
+          <div className="mt-14 lg:mt-20">
+            {featuredServices.map((service, i) => (
+              <Reveal key={service.title}>
+                <article className="group grid gap-x-10 gap-y-6 border-t border-ink/20 py-10 lg:grid-cols-12 lg:py-14">
+                  <span className="type-label text-muted lg:col-span-1 lg:pt-3">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="lg:col-span-4">
+                    <h3 className="type-title text-ink">{service.title}</h3>
+                    <p className="mt-4 max-w-sm text-muted">
+                      {service.description}
+                    </p>
+                    <TextLink href={service.href} className="mt-5 text-primary">
+                      View {service.title.toLowerCase()}
+                    </TextLink>
+                  </div>
+                  <ul className="self-start lg:col-span-3 lg:pt-2">
+                    {service.items.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-center gap-3 py-1.5 text-base text-ink"
                       >
-                        <Icon className="h-6 w-6" aria-hidden="true" />
-                      </span>
-                      <h3 className="mt-5 font-heading text-xl font-semibold text-ink">
-                        {service.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted">
-                        {service.description}
-                      </p>
-                      <ul className="mt-5 grid flex-1 gap-2.5">
-                        {service.items.map((item) => (
-                          <li key={item} className="flex items-center gap-2 text-sm text-ink/75">
-                            <CheckCircle2
-                              className="h-4 w-4 shrink-0 text-secondary"
-                              aria-hidden="true"
-                            />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                      <Link
-                        href={service.href}
-                        className="mt-7 inline-flex items-center gap-2 font-heading text-sm font-semibold text-primary transition-colors hover:text-primary-dark"
-                      >
-                        Learn More
-                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                      </Link>
-                    </div>
-                  </article>
-                </Reveal>
-              );
-            })}
+                        <Check
+                          className="h-4 w-4 shrink-0 text-primary"
+                          aria-hidden="true"
+                        />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="relative aspect-[16/10] overflow-hidden rounded-sm bg-ink lg:col-span-4 lg:aspect-[4/3]">
+                    <Image
+                      src={service.image}
+                      alt={`${service.title} in progress`}
+                      fill
+                      sizes="(min-width: 1024px) 30vw, 100vw"
+                      className="object-cover object-[50%_25%] transition-transform duration-700 ease-out-expo group-hover:scale-105"
+                    />
+                  </div>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20 sm:py-24">
-        <div className="container-site">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Why Choose Us"
-              title="The LEE Difference"
-              description="We combine technical expertise with genuine care for every client."
-            />
+      <section className="section-y">
+        <div className="container-site grid gap-x-12 gap-y-12 lg:grid-cols-12">
+          <Reveal className="lg:col-span-5">
+            <div className="lg:sticky lg:top-28">
+              <SectionHeading
+                eyebrow="Why Choose Us"
+                title="The LEE Difference"
+                description="We combine technical expertise with genuine care for every client."
+              />
+            </div>
           </Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <ol className="lg:col-span-7">
             {whyChooseUs.map((feature, i) => {
               const Icon = feature.icon;
               return (
-                <Reveal key={feature.title} delay={i * 120}>
-                  <article className="h-full rounded-2xl border-t-4 border-primary bg-surface p-7 text-center transition-transform hover:-translate-y-1">
-                    <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white">
-                      <Icon className="h-7 w-7" aria-hidden="true" />
+                <li key={feature.title}>
+                  <Reveal
+                    delay={i * 100}
+                    className="grid grid-cols-[2.75rem_1fr] gap-x-5 border-t border-line py-8 sm:grid-cols-[3.5rem_1fr] sm:py-10"
+                  >
+                    <span className="flex h-11 w-11 items-center justify-center rounded-sm bg-ink text-secondary">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
                     </span>
-                    <h3 className="mt-5 font-heading text-lg font-semibold text-ink">
-                      {feature.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink/70">
-                      {feature.description}
-                    </p>
-                  </article>
-                </Reveal>
+                    <div>
+                      <h3 className="type-heading text-ink">{feature.title}</h3>
+                      <p className="mt-2 max-w-md text-muted">
+                        {feature.description}
+                      </p>
+                    </div>
+                  </Reveal>
+                </li>
               );
             })}
-          </div>
+          </ol>
         </div>
       </section>
 
-      <section className="bg-ink py-20 sm:py-24">
+      <section className="tone-dark section-y bg-ink text-paper">
         <div className="container-site">
-          <Reveal>
+          <Reveal className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <SectionHeading
+              tone="dark"
               eyebrow="Testimonials"
               title="What Our Clients Say"
               description="Real reviews from satisfied customers."
             />
+            <TextLink href="/testimonials" className="shrink-0 text-secondary">
+              View all testimonials
+            </TextLink>
           </Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-x-10 gap-y-12 md:grid-cols-3 lg:mt-20">
             {testimonials.slice(0, 3).map((t, i) => (
-              <Reveal key={`${t.name}-${i}`} delay={i * 120}>
-                <TestimonialCard {...t} />
+              <Reveal key={`${t.name}-${i}`} delay={i * 100}>
+                <TestimonialCard {...t} tone="dark" />
               </Reveal>
             ))}
           </div>
-          <Reveal delay={200}>
-            <div className="mt-10 text-center">
-              <Link
-                href="/testimonials"
-                className="inline-flex items-center gap-2 font-heading text-sm font-semibold text-secondary transition-colors hover:text-white"
-              >
-                View All Testimonials
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </Link>
-            </div>
-          </Reveal>
         </div>
       </section>
 
-      <section className="bg-gradient-to-r from-primary-dark to-primary py-16 sm:py-20">
-        <div className="container-site flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
-          <Reveal>
-            <div>
-              <h2 className="font-heading text-2xl font-bold text-white sm:text-3xl">
-                Need an Electrician or Computer Expert?
-              </h2>
-              <p className="mt-3 max-w-xl text-white/85">
-                Get a free quote today. We respond quickly to homes, offices,
-                schools and businesses.
-              </p>
-            </div>
-          </Reveal>
-          <Reveal delay={150}>
-            <div className="flex flex-col gap-4 sm:flex-row">
-              <a
-                href={site.phoneHref}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-white px-7 py-3.5 font-heading text-base font-semibold text-primary-dark shadow-lg transition-colors hover:bg-surface"
-              >
-                <Phone className="h-5 w-5" aria-hidden="true" />
-                {site.phone}
-              </a>
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-lg border-2 border-white/70 px-7 py-3.5 font-heading text-base font-semibold text-white transition-colors hover:bg-white/10"
-              >
-                <Wrench className="h-5 w-5" aria-hidden="true" />
-                Get a Quote
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      <CallToAction
+        title="Need an Electrician or Computer Expert?"
+        description="Get a free quote today. We respond quickly to homes, offices, schools and businesses."
+      />
     </>
   );
 }

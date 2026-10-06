@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, CheckCircle2, Target, Eye, HeartHandshake } from "lucide-react";
-import SectionHeading from "@/components/SectionHeading";
+import { TextLink } from "@/components/Button";
+import CallToAction from "@/components/CallToAction";
+import PageHeader from "@/components/PageHeader";
+import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
+import SectionHeading from "@/components/SectionHeading";
 import { site, asset } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -19,28 +21,46 @@ const coreValues = [
   "Customer Satisfaction",
 ];
 
+const purpose = [
+  {
+    title: "Our Mission",
+    text: "Deliver quality and reliable electrical and computer solutions that keep homes and businesses running safely and efficiently.",
+  },
+  {
+    title: "Our Vision",
+    text: "Become the most trusted service provider in the region for electrical and computer services.",
+  },
+];
+
 export default function AboutPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-primary-dark via-primary to-secondary py-16 text-white sm:py-20">
-        <div className="container-site">
-          <Reveal>
-            <h1 className="font-heading text-4xl font-bold sm:text-5xl">
-              About Us
-            </h1>
-            <p className="mt-4 max-w-2xl text-lg text-white/85">
-              Who we are, what we believe in, and why customers trust us.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="About Us"
+        title="Your trusted electrical & computer partner."
+        description="Who we are, what we believe in, and why customers trust us."
+      />
 
-      <section className="bg-white py-20 sm:py-24">
-        <div className="container-site grid items-center gap-12 lg:grid-cols-2">
-          <Reveal>
-            <SectionHeading align="left" eyebrow="Who We Are" title="Your Trusted Electrical & Computer Partner" />
-            <div className="mt-5 space-y-4 leading-relaxed text-ink/70">
-              <p>
+      <section className="section-y">
+        <div className="container-site grid gap-x-12 gap-y-12 lg:grid-cols-12 lg:items-center">
+          <Reveal variant="clip" className="lg:col-span-5">
+            <Parallax className="aspect-[4/5] rounded-sm bg-surface sm:aspect-[16/10] lg:aspect-[4/5]">
+              <Image
+                src={asset("/images/photos/panel.png")}
+                alt="LEE technician in uniform working on an electrical distribution board"
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover object-top"
+              />
+            </Parallax>
+          </Reveal>
+          <Reveal delay={120} className="lg:col-span-6 lg:col-start-7">
+            <SectionHeading
+              eyebrow="Who We Are"
+              title="Electrical and computer services, under one roof"
+            />
+            <div className="mt-7 max-w-xl space-y-5 text-muted">
+              <p className="type-lead text-ink">
                 {site.name} is a professional service provider specializing in
                 electrical installations, maintenance, and computer support
                 services for homes, businesses, offices, schools and
@@ -54,24 +74,14 @@ export default function AboutPage() {
                 commitment to quality.
               </p>
             </div>
-            <Link href="/services" className="mt-8 inline-flex items-center gap-2 font-heading text-sm font-semibold text-primary transition-colors hover:text-primary-dark">
-              Explore Our Services
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </Link>
-          </Reveal>
-          <Reveal delay={150}>
-            <Image
-              src={asset("/images/about-team.svg")}
-              alt="LEE Electrical and Computer Services team"
-              width={640}
-              height={520}
-              className="w-full rounded-2xl object-cover shadow-lg"
-            />
+            <TextLink href="/services" className="mt-7 text-primary">
+              Explore our services
+            </TextLink>
           </Reveal>
         </div>
       </section>
 
-      <section className="bg-surface py-20 sm:py-24">
+      <section className="section-y bg-surface">
         <div className="container-site">
           <Reveal>
             <SectionHeading
@@ -79,57 +89,45 @@ export default function AboutPage() {
               title="Mission, Vision & Core Values"
             />
           </Reveal>
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            <Reveal>
-              <article className="h-full rounded-2xl border border-black/5 bg-white p-8 shadow-sm">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <Target className="h-6 w-6" aria-hidden="true" />
-                </span>
-                <h3 className="mt-5 font-heading text-lg font-semibold text-ink">
-                  Our Mission
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink/70">
-                  Deliver quality and reliable electrical and computer
-                  solutions that keep homes and businesses running safely and
-                  efficiently.
-                </p>
-              </article>
-            </Reveal>
-            <Reveal delay={120}>
-              <article className="h-full rounded-2xl border border-black/5 bg-white p-8 shadow-sm">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-secondary/10 text-secondary">
-                  <Eye className="h-6 w-6" aria-hidden="true" />
-                </span>
-                <h3 className="mt-5 font-heading text-lg font-semibold text-ink">
-                  Our Vision
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink/70">
-                  Become the most trusted service provider in the region for
-                  electrical and computer services.
-                </p>
-              </article>
-            </Reveal>
-            <Reveal delay={240}>
-              <article className="h-full rounded-2xl border border-black/5 bg-white p-8 shadow-sm">
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <HeartHandshake className="h-6 w-6" aria-hidden="true" />
-                </span>
-                <h3 className="mt-5 font-heading text-lg font-semibold text-ink">
-                  Core Values
-                </h3>
-                <ul className="mt-2 space-y-2">
-                  {coreValues.map((value) => (
-                    <li key={value} className="flex items-center gap-2 text-sm text-ink/70">
-                      <CheckCircle2 className="h-4 w-4 shrink-0 text-secondary" aria-hidden="true" />
-                      {value}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            </Reveal>
+
+          <div className="mt-14 grid gap-x-12 lg:mt-20 lg:grid-cols-2">
+            {purpose.map((item, i) => (
+              <Reveal key={item.title} delay={i * 120}>
+                <article className="h-full border-t border-ink/20 py-8 lg:py-10">
+                  <h3 className="type-label text-primary">{item.title}</h3>
+                  <p className="mt-5 max-w-lg text-[clamp(1.375rem,2.2vw,1.875rem)] font-medium leading-snug tracking-tight text-ink">
+                    {item.text}
+                  </p>
+                </article>
+              </Reveal>
+            ))}
           </div>
+
+          <Reveal>
+            <div className="border-t border-ink/20 pt-8 lg:pt-10">
+              <h3 className="type-label text-primary">Core Values</h3>
+              <ol className="mt-6 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-5">
+                {coreValues.map((value, i) => (
+                  <li
+                    key={value}
+                    className="flex items-baseline gap-4 border-b border-line py-4 lg:flex-col lg:gap-3 lg:border-b-0 lg:py-0"
+                  >
+                    <span className="type-label text-muted">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="type-heading text-ink">{value}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </Reveal>
         </div>
       </section>
+
+      <CallToAction
+        title="Have a job in mind?"
+        description="Tell us what you need and we will get back to you with a free quote."
+      />
     </>
   );
 }

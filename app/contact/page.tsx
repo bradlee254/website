@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
+import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { site } from "@/lib/site";
 
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
   description: `Get in touch with ${site.name} for electrical and computer services. Call, WhatsApp, email or send us an inquiry.`,
 };
 
-const contactCards = [
+const contactMethods = [
   {
     title: "Call Us",
     value: site.phone,
@@ -47,88 +48,77 @@ const contactCards = [
 export default function ContactPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-primary-dark via-primary to-secondary py-16 text-white sm:py-20">
-        <div className="container-site">
-          <Reveal>
-            <h1 className="font-heading text-4xl font-bold sm:text-5xl">
-              Contact Us
-            </h1>
-            <p className="mt-4 max-w-2xl text-lg text-white/85">
-              Have a question or need a quote? We would love to hear from you.
-            </p>
-          </Reveal>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Contact Us"
+        title="Let’s get it fixed."
+        description="Have a question or need a quote? We would love to hear from you."
+      />
 
-      <section className="bg-white py-16 sm:py-20">
-        <div className="container-site grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {contactCards.map((card, i) => {
-            const { title, value, sub, href, Icon, external } = card;
-            const content = (
-              <>
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                  <Icon className="h-6 w-6" aria-hidden="true" />
-                </span>
-                <h2 className="mt-4 font-heading text-base font-semibold text-ink">
-                  {title}
-                </h2>
-                <p className="mt-1 text-sm font-medium text-ink/80">{value}</p>
-                <p className="mt-1 text-xs text-ink/50">{sub}</p>
-              </>
-            );
-            return (
-              <Reveal key={title} delay={i * 100}>
-                <a
-                  href={href}
-                  {...(external
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
-                  className="block h-full rounded-2xl border border-black/5 bg-white p-6 shadow-sm transition-transform hover:-translate-y-1 hover:shadow-md"
-                >
-                  {content}
-                </a>
-              </Reveal>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="bg-surface py-16 sm:py-20">
-        <div className="container-site grid gap-10 lg:grid-cols-2">
-          <Reveal>
+      <section className="section-y">
+        <div className="container-site grid gap-x-12 gap-y-16 lg:grid-cols-12">
+          <Reveal className="lg:col-span-7">
             <ContactForm />
           </Reveal>
 
-          <Reveal delay={150}>
-            <div className="flex h-full flex-col gap-6">
-              <div className="rounded-2xl border border-black/5 bg-white p-6 shadow-sm">
-                <h2 className="flex items-center gap-2 font-heading text-lg font-semibold text-ink">
-                  <Clock className="h-5 w-5 text-primary" aria-hidden="true" />
-                  Working Hours
-                </h2>
-                <ul className="mt-4 space-y-3">
-                  {site.hours.map((h) => (
-                    <li
-                      key={h.day}
-                      className="flex items-center justify-between gap-4 text-sm"
-                    >
-                      <span className="text-ink/70">{h.day}</span>
-                      <span className="font-medium text-ink">{h.time}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <Reveal delay={120} className="lg:col-span-4 lg:col-start-9">
+            <h2 className="type-label text-primary">Reach us directly</h2>
+            <ul className="mt-5 border-b border-line">
+              {contactMethods.map(({ title, value, sub, href, Icon, external }) => (
+                <li key={title}>
+                  <a
+                    href={href}
+                    {...(external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className="group grid grid-cols-[2.75rem_1fr_auto] items-center gap-x-4 border-t border-line py-5"
+                  >
+                    <span className="flex h-11 w-11 items-center justify-center rounded-sm border border-line text-primary transition-colors duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-paper">
+                      <Icon className="h-5 w-5" aria-hidden="true" />
+                    </span>
+                    <span className="min-w-0">
+                      <span className="type-label block text-muted">
+                        {title}
+                      </span>
+                      <span className="mt-1 block break-words text-base font-semibold text-ink">
+                        {value}
+                      </span>
+                      <span className="block text-sm text-muted">{sub}</span>
+                    </span>
+                    <ArrowUpRight
+                      className="h-4 w-4 text-muted transition-transform duration-300 ease-out-expo group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+                      aria-hidden="true"
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-              <div className="overflow-hidden rounded-2xl border border-black/5 shadow-sm">
-                <iframe
-                  src={site.mapEmbed}
-                  title="Our business location on Google Maps"
-                  className="h-[320px] w-full border-0"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allowFullScreen
-                />
-              </div>
+            <h2 className="type-label mt-12 text-primary">Working hours</h2>
+            <dl className="mt-5 border-b border-line">
+              {site.hours.map((h) => (
+                <div
+                  key={h.day}
+                  className="flex items-baseline justify-between gap-4 border-t border-line py-3.5 text-base"
+                >
+                  <dt className="text-muted">{h.day}</dt>
+                  <dd className="text-right font-semibold text-ink">{h.time}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+        </div>
+
+        <div className="container-site mt-16 lg:mt-24">
+          <Reveal variant="clip">
+            <div className="overflow-hidden rounded-sm border border-line bg-surface">
+              <iframe
+                src={site.mapEmbed}
+                title="Our business location on Google Maps"
+                className="block h-[320px] w-full border-0 sm:h-[420px]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
             </div>
           </Reveal>
         </div>

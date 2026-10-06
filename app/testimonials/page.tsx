@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import CallToAction from "@/components/CallToAction";
+import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import TestimonialCard from "@/components/TestimonialCard";
 import { testimonials } from "@/lib/data";
@@ -12,30 +14,37 @@ export const metadata: Metadata = {
 export default function TestimonialsPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-primary-dark via-primary to-secondary py-16 text-white sm:py-20">
+      <PageHeader
+        eyebrow="Testimonials"
+        title="What our clients say."
+        description="What our customers say about the quality of our work."
+      />
+
+      <section className="section-y">
         <div className="container-site">
-          <Reveal>
-            <h1 className="font-heading text-4xl font-bold sm:text-5xl">
-              Testimonials
-            </h1>
-            <p className="mt-4 max-w-2xl text-lg text-white/85">
-              What our customers say about the quality of our work.
-            </p>
-          </Reveal>
+          {testimonials.length === 0 ? (
+            <div className="border-t border-line py-16">
+              <p className="type-heading text-ink">No reviews published yet.</p>
+              <p className="mt-2 text-muted">
+                Worked with us recently? We would love to hear how it went.
+              </p>
+            </div>
+          ) : (
+            <div className="grid gap-x-12 gap-y-14 md:grid-cols-2">
+              {testimonials.map((t, i) => (
+                <Reveal key={`${t.name}-${i}`} delay={(i % 2) * 100}>
+                  <TestimonialCard {...t} />
+                </Reveal>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      <section className="bg-surface py-20 sm:py-24">
-        <div className="container-site">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {testimonials.map((t, i) => (
-              <Reveal key={`${t.name}-${i}`} delay={(i % 3) * 100}>
-                <TestimonialCard {...t} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
+      <CallToAction
+        title="Ready to be our next happy customer?"
+        description="Get a free quote today. We respond quickly to homes, offices, schools and businesses."
+      />
     </>
   );
 }

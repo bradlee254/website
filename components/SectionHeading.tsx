@@ -2,26 +2,37 @@ export default function SectionHeading({
   eyebrow,
   title,
   description,
-  align = "center",
+  align = "left",
+  tone = "light",
 }: {
   eyebrow?: string;
   title: string;
   description?: string;
   align?: "center" | "left";
+  /** "dark" when the heading sits on an ink background. */
+  tone?: "light" | "dark";
 }) {
-  const alignClass = align === "center" ? "text-center mx-auto" : "text-left";
+  const dark = tone === "dark";
+  const centered = align === "center";
   return (
-    <div className={`max-w-2xl ${alignClass}`}>
+    <div className={`max-w-2xl ${centered ? "mx-auto text-center" : ""}`}>
       {eyebrow && (
-        <p className="text-sm font-semibold uppercase tracking-wider text-secondary">
+        <p
+          className={`type-label flex items-center gap-3 ${
+            centered ? "justify-center" : ""
+          } ${dark ? "text-secondary" : "text-primary"}`}
+        >
+          <span aria-hidden="true" className="h-px w-8 bg-current" />
           {eyebrow}
         </p>
       )}
-      <h2 className="mt-2 font-heading text-3xl font-bold text-ink sm:text-4xl">
+      <h2 className={`type-title mt-5 ${dark ? "text-paper" : "text-ink"}`}>
         {title}
       </h2>
       {description && (
-        <p className="mt-4 text-base leading-relaxed text-ink/70">
+        <p
+          className={`type-lead mt-5 ${dark ? "text-paper/70" : "text-muted"}`}
+        >
           {description}
         </p>
       )}

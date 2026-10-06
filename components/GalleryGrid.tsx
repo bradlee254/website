@@ -1,22 +1,23 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, X } from "lucide-react";
 import { galleryItems } from "@/lib/data";
 
 type Filter = "All" | "Electrical" | "Computer";
 
 const FILTERS: Filter[] = ["All", "Electrical", "Computer"];
 
+// One large lead tile per six; the rest fill a 3-column grid without gaps.
 const BENTO_SPANS = [
   "sm:col-span-2 sm:row-span-2",
   "",
-  "sm:row-span-2",
   "",
-  "sm:col-span-2",
   "",
+  "",
+  "sm:max-lg:col-span-2",
 ];
 
 export default function GalleryGrid({
@@ -31,6 +32,8 @@ export default function GalleryGrid({
     return cat === "Electrical" || cat === "Computer" ? cat : "All";
   });
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
 
   const items = useMemo(
     () =>
@@ -59,6 +62,14 @@ export default function GalleryGrid({
     router.replace(url.pathname + url.search, { scroll: false });
   }
 
+  // Move focus into the viewer when it opens and back to the tile on close.
+  const isOpen = lightbox !== null;
+  useEffect(() => {
+    if (!isOpen) return;
+    closeRef.current?.focus();
+    return () => openerRef.current?.focus();
+  }, [isOpen]);
+
   useEffect(() => {
     if (lightbox === null) return;
     const onKey = (e: KeyboardEvent) => {
@@ -78,110 +89,158 @@ export default function GalleryGrid({
     };
   }, [lightbox, visible.length]);
 
-  const filters: Filter[] = FILTERS;
+  const navButtonClass =
+    "absolute top-1/2 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-sm bg-paper/10 text-paper transition-colors hover:bg-paper/20";
 
   return (
     <div>
       {showAll && (
-        <div className="mb-8 flex flex-wrap justify-center gap-2">
-          {filters.map((f) => (
-            <button
-              key={f}
-              type="button"
-              onClick={() => selectFilter(f)}
-              aria-pressed={filter === f}
-              className={`rounded-full px-5 py-2 text-sm font-medium transition-colors ${
-                filter === f
-                  ? "bg-primary text-white"
-                  : "bg-white text-ink/70 ring-1 ring-black/10 hover:text-primary"
-              }`}
-            >
-              {f}
-            </button>
-          ))}
+        <div
+          role="group"
+          aria-label="Filter projects by category"
+          className="mb-10 flex gap-x-8 overflow-x-auto border-b border-line"
+        >
+          {FILTERS.map((f) => {
+            const count =
+              f === "All"
+                ? items.length
+                : items.filter((item) => item.category === f).length;
+            const active = filter === f;
+            return (
+              <button
+                key={f}
+                type="button"
+                onClick={() => selectFilter(f)}
+                aria-pressed={active}
+                className={`relative -mb-px flex min-h-12 shrink-0 items-baseline gap-2 border-b-2 text-base font-semibold transition-colors duration-200 ${
+                  active
+                    ? "border-primary text-ink"
+                    : "border-transparent text-muted hover:text-ink"
+                }`}
+              >
+                {f}
+                <span className="type-label text-muted">
+                  {String(count).padStart(2, "0")}
+                </span>
+              </button>
+            );
+          })}
         </div>
       )}
 
-      <ul className="grid grid-flow-dense grid-cols-1 auto-rows-[200px] gap-4 sm:grid-cols-2 sm:auto-rows-[220px] lg:grid-cols-3">
-        {visible.map((item, i) => (
-          <li
-            key={item.id}
-            className={BENTO_SPANS[i % BENTO_SPANS.length]}
+      {visible.length === 0 ? (
+        <div className="border-t border-line py-16">
+          <p className="type-heading text-ink">
+            No {filter.toLowerCase()} projects to show yet.
+          </p>
+          <p className="mt-2 text-muted">
+            We are still adding photos of this kind of work.
+          </p>
+          <button
+            type="button"
+            onClick={() => selectFilter("All")}
+            className="link-underline mt-6 min-h-11 font-semibold text-primary"
           >
-            <button
-              type="button"
-              onClick={() => setLightbox(i)}
-              aria-label={`Enlarge image: ${item.label}`}
-              className="group relative block h-full w-full overflow-hidden rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            View all projects
+          </button>
+        </div>
+      ) : (
+        <ul className="grid grid-flow-dense auto-rows-[260px] grid-cols-1 gap-3 sm:auto-rows-[240px] sm:grid-cols-2 sm:gap-4 lg:auto-rows-[280px] lg:grid-cols-3">
+          {visible.map((item, i) => (
+            <li
+              key={item.id}
+              className={`animate-fade-up ${BENTO_SPANS[i % BENTO_SPANS.length]}`}
+              style={{ "--delay": `${i * 60}ms` } as React.CSSProperties}
             >
-              <Image
-                src={item.src}
-                alt={item.alt}
-                fill
-                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <span className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent opacity-80" />
-              <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-primary">
-                {item.category}
-              </span>
-              <span className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-left">
-                <span className="font-heading text-sm font-semibold text-white">
-                  {item.label}
+              <button
+                type="button"
+                onClick={(e) => {
+                  openerRef.current = e.currentTarget;
+                  setLightbox(i);
+                }}
+                aria-label={`Enlarge image: ${item.label}`}
+                className="group relative block h-full w-full overflow-hidden rounded-sm bg-ink text-left"
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-700 ease-out-expo group-hover:scale-105"
+                />
+                <span className="absolute inset-0 bg-linear-to-t from-ink/90 via-ink/30 via-45% to-transparent" />
+                <span className="absolute inset-x-5 bottom-5 flex items-end justify-between gap-4">
+                  <span>
+                    <span className="type-label block text-secondary">
+                      {item.category}
+                    </span>
+                    <span className="mt-1.5 block text-lg font-semibold leading-tight tracking-tight text-paper">
+                      {item.label}
+                    </span>
+                  </span>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm bg-paper text-ink transition-transform duration-300 ease-out-expo group-hover:rotate-90">
+                    <Plus className="h-5 w-5" aria-hidden="true" />
+                  </span>
                 </span>
-                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
-                  <ZoomIn className="h-4 w-4" aria-hidden="true" />
-                </span>
-              </span>
-            </button>
-          </li>
-        ))}
-      </ul>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
 
-      {lightbox !== null && (
+      {lightbox !== null && visible[lightbox] && (
         <div
           role="dialog"
           aria-modal="true"
           aria-label="Image viewer"
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/90 p-4"
+          data-lenis-prevent
+          className="tone-dark animate-fade-in fixed inset-0 z-[60] flex items-center justify-center bg-ink/95 p-4 sm:p-10"
           style={{ overscrollBehavior: "contain" }}
           onClick={() => setLightbox(null)}
         >
           <button
+            ref={closeRef}
             type="button"
             aria-label="Close image viewer"
             onClick={() => setLightbox(null)}
-            className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+            className="absolute right-4 top-4 flex h-12 w-12 items-center justify-center rounded-sm bg-paper/10 text-paper transition-colors hover:bg-paper/20"
           >
-            <X className="h-5 w-5" />
+            <X className="h-5 w-5" aria-hidden="true" />
           </button>
-          <button
-            type="button"
-            aria-label="Previous image"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightbox((i) =>
-                i === null ? i : (i - 1 + visible.length) % visible.length,
-              );
-            }}
-            className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 sm:left-6"
-          >
-            <ChevronLeft className="h-6 w-6" />
-          </button>
-          <button
-            type="button"
-            aria-label="Next image"
-            onClick={(e) => {
-              e.stopPropagation();
-              setLightbox((i) => (i === null ? i : (i + 1) % visible.length));
-            }}
-            className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20 sm:right-6"
-          >
-            <ChevronRight className="h-6 w-6" />
-          </button>
+          {visible.length > 1 && (
+            <>
+              <button
+                type="button"
+                aria-label="Previous image"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightbox((i) =>
+                    i === null ? i : (i - 1 + visible.length) % visible.length,
+                  );
+                }}
+                className={`${navButtonClass} left-3 sm:left-6`}
+              >
+                <ChevronLeft className="h-6 w-6" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next image"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setLightbox((i) =>
+                    i === null ? i : (i + 1) % visible.length,
+                  );
+                }}
+                className={`${navButtonClass} right-3 sm:right-6`}
+              >
+                <ChevronRight className="h-6 w-6" aria-hidden="true" />
+              </button>
+            </>
+          )}
 
           <figure
-            className="max-h-[85vh] max-w-4xl"
+            key={visible[lightbox].id}
+            className="animate-fade-up max-h-full max-w-4xl"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -189,15 +248,21 @@ export default function GalleryGrid({
               alt={visible[lightbox].alt}
               width={1024}
               height={768}
-              className="max-h-[75vh] w-auto rounded-lg object-contain"
+              className="mx-auto max-h-[72vh] w-auto rounded-sm object-contain"
             />
-            <figcaption className="mt-4 text-center">
-              <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-secondary">
-                {visible[lightbox].category}
+            <figcaption className="mt-5 flex items-baseline justify-between gap-6 text-paper">
+              <span>
+                <span className="type-label block text-secondary">
+                  {visible[lightbox].category}
+                </span>
+                <span className="mt-1.5 block text-lg font-semibold tracking-tight">
+                  {visible[lightbox].label}
+                </span>
               </span>
-              <p className="mt-2 text-sm text-white/80">
-                {visible[lightbox].label}
-              </p>
+              <span className="type-label shrink-0 text-paper/60" aria-live="polite">
+                {String(lightbox + 1).padStart(2, "0")} /{" "}
+                {String(visible.length).padStart(2, "0")}
+              </span>
             </figcaption>
           </figure>
         </div>

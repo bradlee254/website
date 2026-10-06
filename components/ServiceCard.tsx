@@ -1,46 +1,28 @@
 import type { Service } from "@/lib/data";
 
-const accentClasses = {
-  primary: {
-    border: "border-t-primary",
-    icon: "bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white",
-  },
-  secondary: {
-    border: "border-t-secondary",
-    icon: "bg-secondary/10 text-secondary group-hover:bg-secondary group-hover:text-white",
-  },
-  "primary-dark": {
-    border: "border-t-primary-dark",
-    icon: "bg-primary-dark/10 text-primary-dark group-hover:bg-primary-dark group-hover:text-white",
-  },
-} as const;
-
+/** One line of a service list: number, name, what it covers. */
 export default function ServiceCard({
   service,
-  accent = "primary",
+  index,
 }: {
   service: Service;
-  accent?: keyof typeof accentClasses;
+  index: number;
 }) {
   const Icon = service.icon;
-  const classes = accentClasses[accent];
   return (
-    <div
-      className={`group flex h-full flex-col items-start gap-4 rounded-2xl border-t-4 bg-white p-6 shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${classes.border}`}
-    >
-      <span
-        className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${classes.icon}`}
-      >
-        <Icon className="h-6 w-6" aria-hidden="true" />
+    <div className="group grid grid-cols-[2.5rem_1fr] items-start gap-x-4 border-t border-line py-6 sm:grid-cols-[3rem_1fr_auto] sm:gap-x-6">
+      <span className="type-label pt-1.5 text-muted">
+        {String(index).padStart(2, "0")}
       </span>
       <div>
-        <h3 className="font-heading text-base font-semibold text-ink">
-          {service.title}
-        </h3>
-        <p className="mt-1 text-sm leading-relaxed text-ink/70">
+        <h3 className="type-heading text-ink">{service.title}</h3>
+        <p className="mt-1.5 max-w-md text-base text-muted">
           {service.description}
         </p>
       </div>
+      <span className="hidden h-11 w-11 items-center justify-center rounded-sm border border-line text-primary transition-colors duration-300 group-hover:border-primary group-hover:bg-primary group-hover:text-paper sm:flex">
+        <Icon className="h-5 w-5" aria-hidden="true" />
+      </span>
     </div>
   );
 }

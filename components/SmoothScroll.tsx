@@ -8,8 +8,6 @@ import Lenis from "lenis";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const NAV_OFFSET = 96;
-
 export default function SmoothScroll() {
   const pathname = usePathname();
   const lenisRef = useRef<Lenis | null>(null);
@@ -70,7 +68,8 @@ export default function SmoothScroll() {
       const target = document.getElementById(id);
       if (target) {
         window.setTimeout(() => {
-          lenis.scrollTo(target, { offset: -NAV_OFFSET });
+          // Lenis honours each target's CSS scroll-margin-top for the header.
+          lenis.scrollTo(target);
         }, 250);
       }
     };

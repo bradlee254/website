@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import Reveal from "@/components/Reveal";
+import CallToAction from "@/components/CallToAction";
 import GalleryGrid from "@/components/GalleryGrid";
+import PageHeader from "@/components/PageHeader";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -12,44 +13,41 @@ export const metadata: Metadata = {
 export default function GalleryPage() {
   return (
     <>
-      <section className="bg-gradient-to-br from-primary-dark via-primary to-secondary py-16 text-white sm:py-20">
+      <PageHeader
+        eyebrow="Our Gallery"
+        title="Recent work, up close."
+        description="A look at some of the projects we have completed. Click any image to enlarge it."
+      />
+
+      <section className="section-y">
         <div className="container-site">
-          <Reveal>
-            <h1 className="font-heading text-4xl font-bold sm:text-5xl">
-              Our Gallery
-            </h1>
-            <p className="mt-4 max-w-2xl text-lg text-white/85">
-              A look at some of the projects we have completed. Click any image
-              to enlarge it.
-            </p>
-          </Reveal>
+          <Suspense
+            fallback={
+              <div
+                role="status"
+                aria-label="Loading gallery"
+                className="grid grid-flow-dense auto-rows-[260px] grid-cols-1 gap-3 sm:auto-rows-[240px] sm:grid-cols-2 sm:gap-4 lg:auto-rows-[280px] lg:grid-cols-3"
+              >
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className={`animate-pulse rounded-sm bg-ink/10 ${
+                      i === 0 ? "sm:col-span-2 sm:row-span-2" : ""
+                    }`}
+                  />
+                ))}
+              </div>
+            }
+          >
+            <GalleryGrid />
+          </Suspense>
         </div>
       </section>
 
-      <section className="bg-surface py-20 sm:py-24">
-        <div className="container-site">
-          <Reveal>
-            <Suspense
-              fallback={
-                <div className="grid grid-flow-dense grid-cols-1 auto-rows-[200px] gap-4 sm:grid-cols-2 sm:auto-rows-[220px] lg:grid-cols-3">
-                  {Array.from({ length: 6 }).map((_, i) => (
-                    <div
-                      key={i}
-                      className={
-                        i % 6 === 0
-                          ? "col-span-1 animate-pulse rounded-2xl bg-black/10 sm:col-span-2 sm:row-span-2"
-                          : "col-span-1 animate-pulse rounded-2xl bg-black/10"
-                      }
-                    />
-                  ))}
-                </div>
-              }
-            >
-              <GalleryGrid />
-            </Suspense>
-          </Reveal>
-        </div>
-      </section>
+      <CallToAction
+        title="Want work like this at your place?"
+        description="Tell us about the job and we will get back to you with a free quote."
+      />
     </>
   );
 }

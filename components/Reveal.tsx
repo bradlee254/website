@@ -6,10 +6,13 @@ export default function Reveal({
   children,
   delay = 0,
   className = "",
+  variant = "up",
 }: {
   children: React.ReactNode;
   delay?: number;
   className?: string;
+  /** "up" slides and fades, "fade" only fades, "clip" wipes in (for media). */
+  variant?: "up" | "fade" | "clip";
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -24,7 +27,8 @@ export default function Reveal({
           observer.disconnect();
         }
       },
-      { threshold: 0.15 },
+      // A bottom inset instead of a ratio threshold, so tall blocks still fire.
+      { rootMargin: "0px 0px -8% 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -33,10 +37,9 @@ export default function Reveal({
   return (
     <div
       ref={ref}
-      style={{ transitionDelay: `${delay}ms` }}
-      className={`transition-[transform,opacity] duration-700 ease-out ${
-        visible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-      } ${className}`}
+      data-variant={variant}
+      style={{ "--reveal-delay": `${delay}ms` } as React.CSSProperties}
+      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
     >
       {children}
     </div>

@@ -121,7 +121,6 @@ export const featuredServices = [
     ],
     href: "/services#electrical",
     icon: Lightbulb,
-    accent: "bg-primary",
   },
   {
     title: "Computer Services",
@@ -137,7 +136,6 @@ export const featuredServices = [
     ],
     href: "/services#computer",
     icon: Cpu,
-    accent: "bg-secondary",
   },
   {
     title: "CCTV Installation",
@@ -153,8 +151,6 @@ export const featuredServices = [
     ],
     href: "/services#cctv",
     icon: Cctv,
-    accent: "bg-accent",
-    fullWidth: true,
   },
 ];
 
