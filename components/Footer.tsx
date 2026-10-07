@@ -1,28 +1,20 @@
 import Link from "next/link";
-import { ArrowUpRight, Zap } from "lucide-react";
-import { site } from "@/lib/site";
+import { Zap } from "lucide-react";
+import { services } from "@/lib/services";
+import { site, whatsappLink } from "@/lib/site";
 
 const quickLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
+  { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/gallery", label: "Our Work" },
   { href: "/testimonials", label: "Testimonials" },
-  { href: "/contact", label: "Contact Us" },
+  { href: "/contact", label: "Contact" },
 ];
 
-const serviceLinks = [
-  { href: "/services#electrical", label: "Electrical Services" },
-  { href: "/services#cctv", label: "CCTV Installation" },
-  { href: "/services#computer", label: "Computer Services" },
-  { href: "/contact", label: "Get a Quote" },
-  { href: "/contact", label: "Request Repair" },
-];
-
-const socials = [
-  { href: "https://facebook.com", label: "Facebook" },
-  { href: "https://instagram.com", label: "Instagram" },
-  { href: "https://twitter.com", label: "Twitter" },
+const legalLinks = [
+  { href: "/privacy", label: "Privacy Policy" },
+  { href: "/terms", label: "Terms of Service" },
 ];
 
 const headingClass = "type-label text-paper/50";
@@ -49,9 +41,7 @@ export default function Footer() {
               </span>
             </Link>
             <p className="mt-6 max-w-sm text-[0.9375rem] text-paper/65">
-              Professional electrical installations, computer repairs, software
-              support and maintenance services. Quality work with complete
-              customer satisfaction.
+              {site.description}
             </p>
             <a
               href={site.phoneHref}
@@ -59,11 +49,23 @@ export default function Footer() {
             >
               {site.phone}
             </a>
-            <p className="mt-3">
-              <a href={`mailto:${site.email}`} className={linkClass}>
-                {site.email}
-              </a>
-            </p>
+            <ul className="mt-3 flex flex-wrap gap-x-6">
+              <li>
+                <a
+                  href={whatsappLink("Hello LEE, I need help with ")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={linkClass}
+                >
+                  Chat on WhatsApp
+                </a>
+              </li>
+              <li>
+                <a href={`mailto:${site.email}`} className={linkClass}>
+                  {site.email}
+                </a>
+              </li>
+            </ul>
           </div>
 
           <nav aria-label="Quick links" className="lg:col-span-2">
@@ -82,10 +84,10 @@ export default function Footer() {
           <nav aria-label="Services" className="lg:col-span-2">
             <h3 className={headingClass}>Services</h3>
             <ul className="mt-5 space-y-1">
-              {serviceLinks.map((link) => (
-                <li key={link.label}>
-                  <Link href={link.href} className={linkClass}>
-                    {link.label}
+              {services.map((service) => (
+                <li key={service.slug}>
+                  <Link href={`/services/${service.slug}`} className={linkClass}>
+                    {service.name}
                   </Link>
                 </li>
               ))}
@@ -93,8 +95,10 @@ export default function Footer() {
           </nav>
 
           <div className="lg:col-span-3">
-            <h3 className={headingClass}>Visit & Hours</h3>
-            <p className="mt-5 text-[0.9375rem] text-paper/80">{site.address}</p>
+            <h3 className={headingClass}>Area & Hours</h3>
+            <p className="mt-5 text-[0.9375rem] text-paper/80">
+              Serving {site.serviceArea}
+            </p>
             <dl className="mt-5 space-y-2 text-[0.9375rem]">
               {site.hours.map((h) => (
                 <div key={h.day} className="flex justify-between gap-4">
@@ -111,17 +115,14 @@ export default function Footer() {
             © {new Date().getFullYear()} {site.name}. All Rights Reserved.
           </p>
           <ul className="flex flex-wrap gap-x-6 gap-y-1">
-            {socials.map(({ href, label }) => (
-              <li key={label}>
-                <a
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex min-h-11 items-center gap-1 transition-colors hover:text-paper sm:min-h-0"
+            {legalLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="inline-flex min-h-11 items-center transition-colors hover:text-paper sm:min-h-0"
                 >
-                  {label}
-                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                </a>
+                  {link.label}
+                </Link>
               </li>
             ))}
           </ul>
