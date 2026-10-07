@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
-import { site } from "@/lib/site";
+import { site, whatsappLink } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact Us",
-  description: `Get in touch with ${site.name} for electrical and computer services. Call, WhatsApp, email or send us an inquiry.`,
+  description: `Request a free quote from ${site.name} for electrical, CCTV and computer services in Nairobi. Call, WhatsApp, email or use the form.`,
+  alternates: { canonical: "/contact" },
 };
 
 const contactMethods = [
@@ -23,7 +25,7 @@ const contactMethods = [
     title: "WhatsApp",
     value: site.whatsapp,
     sub: "Chat with us",
-    href: site.whatsappHref,
+    href: whatsappLink("Hello LEE, I need help with "),
     Icon: MessageCircle,
     external: true,
   },
@@ -36,9 +38,9 @@ const contactMethods = [
     external: false,
   },
   {
-    title: "Visit Us",
-    value: site.address,
-    sub: "Our business location",
+    title: "Location",
+    value: site.locality,
+    sub: `Serving ${site.serviceArea}`,
     href: site.mapLink,
     Icon: MapPin,
     external: true,
@@ -50,14 +52,17 @@ export default function ContactPage() {
     <>
       <PageHeader
         eyebrow="Contact Us"
-        title="Let’s get it fixed."
-        description="Have a question or need a quote? We would love to hear from you."
+        title="Request a free quote."
+        description="Tell us what you need by form, phone or WhatsApp. For anything urgent, calling is fastest."
       />
 
       <section className="section-y">
         <div className="container-site grid gap-x-12 gap-y-16 lg:grid-cols-12">
           <Reveal className="lg:col-span-7">
-            <ContactForm />
+            {/* The form reads ?service= from the URL, which needs a boundary. */}
+            <Suspense fallback={<div className="h-[40rem] animate-pulse rounded-sm bg-ink/5" />}>
+              <ContactForm />
+            </Suspense>
           </Reveal>
 
           <Reveal delay={120} className="lg:col-span-4 lg:col-start-9">
@@ -109,11 +114,14 @@ export default function ContactPage() {
         </div>
 
         <div className="container-site mt-16 lg:mt-24">
+          <h2 className="type-label mb-5 text-primary">
+            Areas we serve — {site.serviceArea}
+          </h2>
           <Reveal variant="clip">
             <div className="overflow-hidden rounded-sm border border-line bg-surface">
               <iframe
                 src={site.mapEmbed}
-                title="Our business location on Google Maps"
+                title="Map of Nairobi, the area we serve"
                 className="block h-[320px] w-full border-0 sm:h-[420px]"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
