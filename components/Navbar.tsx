@@ -76,8 +76,8 @@ export default function Navbar() {
             <span className="block text-xl font-extrabold tracking-tight [font-stretch:122%]">
               LEE
             </span>
-            <span className="mt-1 block font-mono text-[0.625rem] font-medium uppercase tracking-[0.16em] text-paper/65">
-              Electrical & Computer
+            <span className="mt-1 block font-mono text-[0.5625rem] font-medium uppercase tracking-[0.1em] text-paper/65 min-[360px]:text-[0.625rem] min-[360px]:tracking-[0.14em]">
+              Electrical & Computer Services
             </span>
           </span>
         </Link>

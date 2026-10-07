@@ -179,13 +179,13 @@ export default async function ServicePage({ params }: Props) {
         <div className="container-site">
           <Reveal>
             <SectionHeading
-              eyebrow="Typical Process"
-              title="From first call to follow-up"
+              eyebrow="Our Process"
+              title={`How a ${service.name.toLowerCase().replace("cctv", "CCTV")} job runs`}
               description="You always know what happens next and what the work involves."
             />
           </Reveal>
           <div className="mt-14 lg:mt-16">
-            <ProcessSteps />
+            <ProcessSteps steps={service.process} />
           </div>
         </div>
       </section>

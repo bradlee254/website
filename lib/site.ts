@@ -1,9 +1,9 @@
 export const site = {
-  name: "LEE Electrical and Computer Services",
-  shortName: "LEE Electrical & Computer",
+  // The one business name used everywhere on the site.
+  name: "LEE Electrical & Computer Services",
   tagline: "Power. Security. Technology. Done Right.",
   description:
-    "Professional electrical installation, CCTV security and computer services for homes and businesses across Nairobi.",
+    "Professional electrical, CCTV and computer services for homes and businesses across Nairobi.",
   url: "https://lee-electrical.example.com",
   phone: "+254 708 657 832",
   phoneHref: "tel:+254708657832",

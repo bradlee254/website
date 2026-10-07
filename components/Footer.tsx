@@ -3,12 +3,11 @@ import { Zap } from "lucide-react";
 import { services } from "@/lib/services";
 import { site, whatsappLink } from "@/lib/site";
 
-const quickLinks = [
-  { href: "/", label: "Home" },
+const companyLinks = [
   { href: "/about", label: "About" },
-  { href: "/services", label: "Services" },
   { href: "/gallery", label: "Our Work" },
   { href: "/testimonials", label: "Testimonials" },
+  { href: "/#faqs", label: "FAQs" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -35,12 +34,15 @@ export default function Footer() {
                 <span className="block text-xl font-extrabold tracking-tight [font-stretch:122%]">
                   LEE
                 </span>
-                <span className="mt-1 block font-mono text-[0.625rem] font-medium uppercase tracking-[0.16em] text-paper/65">
-                  Electrical & Computer
+                <span className="mt-1 block font-mono text-[0.5625rem] font-medium uppercase tracking-[0.1em] text-paper/65 min-[360px]:text-[0.625rem] min-[360px]:tracking-[0.14em]">
+                  Electrical & Computer Services
                 </span>
               </span>
             </Link>
-            <p className="mt-6 max-w-sm text-[0.9375rem] text-paper/65">
+            <p className="mt-6 text-lg font-semibold tracking-tight text-paper">
+              {site.tagline}
+            </p>
+            <p className="mt-2 max-w-sm text-[0.9375rem] text-paper/65">
               {site.description}
             </p>
             <a
@@ -68,10 +70,10 @@ export default function Footer() {
             </ul>
           </div>
 
-          <nav aria-label="Quick links" className="lg:col-span-2">
-            <h3 className={headingClass}>Quick Links</h3>
+          <nav aria-label="Company" className="lg:col-span-2">
+            <h3 className={headingClass}>Company</h3>
             <ul className="mt-5 space-y-1">
-              {quickLinks.map((link) => (
+              {companyLinks.map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className={linkClass}>
                     {link.label}

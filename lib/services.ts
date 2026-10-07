@@ -3,6 +3,7 @@ import { Cctv, HardDrive, Laptop, Network, Zap } from "lucide-react";
 import { asset } from "@/lib/site";
 
 export type Faq = { question: string; answer: string };
+export type Step = { title: string; description: string };
 
 export type ServiceDetail = {
   slug: string;
@@ -16,6 +17,12 @@ export type ServiceDetail = {
   icon: LucideIcon;
   /** Shown as one of the three headline services on the home page. */
   featured: boolean;
+  /** Three-word summary for the home page, e.g. "Installation • Repairs". */
+  tagline?: string;
+  /** The 4–6 services listed on the home page panel. */
+  highlights?: string[];
+  /** Steps specific to this service; the general process is used otherwise. */
+  process: Step[];
   image?: { src: string; alt: string; position: string };
   /** Optional second photo, shown under the "what's included" list. */
   detailImage?: { src: string; alt: string; caption: string };
@@ -38,6 +45,21 @@ export const services: ServiceDetail[] = [
       "Safe, durable electrical work for homes, offices and shops. We install, repair and maintain wiring, lighting and distribution boards, and we track down faults when something stops working.",
     icon: Zap,
     featured: true,
+    tagline: "Installation • Repairs • Maintenance",
+    highlights: [
+      "House & commercial wiring",
+      "Lighting installation",
+      "Socket & switch installation",
+      "Fault diagnosis & repairs",
+      "Distribution boards",
+    ],
+    process: [
+      { title: "Inspection", description: "We look at the existing wiring and what you need done." },
+      { title: "Quote", description: "You get a clear quotation covering the work and materials." },
+      { title: "Installation or repair", description: "The technician carries out the work safely." },
+      { title: "Testing", description: "Every circuit we touched is tested before power stays on." },
+      { title: "Handover", description: "We show you what was done and answer your questions." },
+    ],
     image: {
       src: asset("/images/photos/socket-installation.webp"),
       alt: "Technician fitting a wall socket with an insulated screwdriver",
@@ -105,6 +127,21 @@ export const services: ServiceDetail[] = [
       "Complete CCTV systems for homes and businesses. We install and configure the cameras and recorder, set up viewing on your phone or computer, and keep the system working afterwards.",
     icon: Cctv,
     featured: true,
+    tagline: "Installation • Configuration • Monitoring",
+    highlights: [
+      "Camera installation",
+      "DVR/NVR installation",
+      "Remote viewing on your phone",
+      "Storage configuration",
+      "Maintenance & troubleshooting",
+    ],
+    process: [
+      { title: "Site assessment", description: "We look at the property and what you need to see." },
+      { title: "Camera positioning", description: "We agree where each camera goes for the best coverage." },
+      { title: "Installation", description: "Cameras, cabling and the recorder are fitted neatly." },
+      { title: "Configuration", description: "Recording, storage and phone access are set up." },
+      { title: "Testing", description: "We check every camera with you, day and night view." },
+    ],
     image: {
       src: asset("/images/photos/cctv-installation.webp"),
       alt: "Technician on a stepladder mounting a dome CCTV camera to an office ceiling",
@@ -121,7 +158,9 @@ export const services: ServiceDetail[] = [
       "CCTV configuration",
       "Camera replacement",
       "Remote monitoring setup",
+      "Mobile access",
       "DVR/NVR installation",
+      "Storage configuration",
       "Security system maintenance",
       "Camera troubleshooting",
       "Home security systems",
@@ -168,7 +207,7 @@ export const services: ServiceDetail[] = [
     },
   },
   {
-    slug: "computer-repair",
+    slug: "computer",
     name: "Computer Repair",
     title: "Computer & IT Services",
     summary:
@@ -177,6 +216,21 @@ export const services: ServiceDetail[] = [
       "Repairs and support for laptops and desktop computers. We fix hardware faults, install Windows and software, remove viruses and look after the computers a business depends on.",
     icon: Laptop,
     featured: true,
+    tagline: "Repairs • Networking • Support",
+    highlights: [
+      "Computer & laptop repair",
+      "Windows & software installation",
+      "Virus & malware removal",
+      "Networking & Wi-Fi setup",
+      "Business IT support",
+    ],
+    process: [
+      { title: "Diagnosis", description: "We find out what is actually wrong with the machine." },
+      { title: "Quote", description: "You know the fix and the cost before we proceed." },
+      { title: "Repair", description: "Hardware or software is repaired or replaced." },
+      { title: "Testing", description: "We run the computer properly to confirm the fault is gone." },
+      { title: "Handover", description: "You get it back with an explanation of what was done." },
+    ],
     image: {
       src: asset("/images/photos/laptop-repair.webp"),
       alt: "Laptop opened up on a workbench during a repair",
@@ -242,6 +296,13 @@ export const services: ServiceDetail[] = [
       "Network installation and Wi-Fi setup for homes and offices. We plan the layout, run the cabling, set up the equipment and make sure every device connects reliably.",
     icon: Network,
     featured: false,
+    process: [
+      { title: "Site survey", description: "We check the building, the devices and where signal is weak." },
+      { title: "Network plan", description: "We agree where cabling, switches and access points go." },
+      { title: "Cabling & installation", description: "Cables are run, labelled and the equipment is fitted." },
+      { title: "Configuration", description: "Wi-Fi, security and shared devices are set up." },
+      { title: "Testing", description: "We test speed and coverage in every area you use." },
+    ],
     image: {
       src: asset("/images/photos/network-cabinet.webp"),
       alt: "Technician connecting labelled network cables in a wall-mounted cabinet",
@@ -301,6 +362,13 @@ export const services: ServiceDetail[] = [
       "When a drive fails or files are deleted, we work to get your documents, photos and business data back — and set up backups so you are protected next time.",
     icon: HardDrive,
     featured: false,
+    process: [
+      { title: "Assessment", description: "We examine the device to see what has failed." },
+      { title: "Quote", description: "We tell you what is likely recoverable and the cost." },
+      { title: "Recovery", description: "We work to retrieve your files without changing the original drive." },
+      { title: "Verification", description: "You check that the files you need are there and open." },
+      { title: "Handover & backup", description: "Files are returned and we advise on backing up." },
+    ],
     image: {
       src: asset("/images/photos/data-recovery.webp"),
       alt: "Technician placing a hard drive into a drive dock beside a laptop",
@@ -370,42 +438,69 @@ export function quoteLink(slug?: string): string {
 
 export const whyChooseLee = [
   {
+    title: "One Team, Multiple Skills",
+    description: "Electrical, CCTV and computer expertise under one roof.",
+  },
+  {
+    title: "Clear Communication",
+    description:
+      "We explain the problem and the work required before proceeding.",
+  },
+  {
+    title: "Professional Workmanship",
+    description:
+      "We focus on safe, reliable and properly completed installations and repairs.",
+  },
+  {
     title: "Fast Response",
     description:
-      "Get help when you actually need it, including urgent electrical and technical problems.",
+      "Get assistance when you need it, including urgent service requests.",
   },
   {
-    title: "Experienced Technicians",
+    title: "Homes & Businesses",
     description:
-      "Practical experience across electrical, security and computer systems.",
-  },
-  {
-    title: "Transparent Pricing",
-    description: "Know what the work involves before the job begins.",
-  },
-  {
-    title: "One Team, Multiple Skills",
-    description: "Electrical, CCTV and IT expertise under one roof.",
-  },
-  {
-    title: "Residential & Commercial",
-    description:
-      "Services designed for homes, offices, shops and other businesses.",
+      "Solutions for residential, commercial and office environments.",
   },
 ];
 
-export const processSteps = [
-  { title: "Contact Us", description: "Tell us what you need." },
+export const processSteps: Step[] = [
   {
-    title: "Assessment",
-    description:
-      "We understand the problem and determine the work required.",
+    title: "Tell us what you need",
+    description: "Call, WhatsApp or submit a quote request.",
   },
-  { title: "Quote", description: "You receive a clear quotation." },
-  { title: "Service", description: "Our technician completes the work." },
   {
-    title: "Follow-Up",
-    description: "We make sure everything is working properly.",
+    title: "We assess the job",
+    description: "We understand the problem and determine what’s required.",
+  },
+  {
+    title: "You receive a quote",
+    description: "You know the expected work and cost before proceeding.",
+  },
+  {
+    title: "We do the work",
+    description: "Our technician completes the service.",
+  },
+  {
+    title: "We test and hand over",
+    description: "We make sure everything works properly.",
+  },
+];
+
+export const businessSolutions = [
+  {
+    title: "Electrical",
+    description: "Office wiring, lighting and maintenance.",
+    href: "/services/electrical",
+  },
+  {
+    title: "Security",
+    description: "CCTV installation and monitoring.",
+    href: "/services/cctv",
+  },
+  {
+    title: "IT",
+    description: "Computer maintenance, networking and technical support.",
+    href: "/services/computer",
   },
 ];
 
@@ -425,9 +520,14 @@ export const generalFaqs: Faq[] = [
       "Yes. We repair laptops and desktop computers, covering hardware faults, Windows and software problems, and virus removal.",
   },
   {
-    question: "Do you provide services outside Nairobi?",
+    question: "Do you work with businesses?",
     answer:
-      "We mainly serve Nairobi and the surrounding areas. For jobs further out, contact us with the location and we will let you know whether we can help.",
+      "Yes. We handle office wiring, lighting and electrical maintenance, CCTV for business premises, and computer, network and IT support for offices and shops.",
+  },
+  {
+    question: "Which areas do you serve?",
+    answer:
+      "We serve Nairobi and the surrounding areas. For jobs further out, contact us with the location and we will let you know whether we can help.",
   },
   {
     question: "How much does CCTV installation cost?",
