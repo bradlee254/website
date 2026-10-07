@@ -8,10 +8,12 @@ export default function CallToAction({
   title,
   description,
   actionLabel = "Get a free quote",
+  actionHref = "/contact",
 }: {
   title: string;
   description: string;
   actionLabel?: string;
+  actionHref?: string;
 }) {
   return (
     <section className="tone-dark bg-primary-dark text-paper">
@@ -22,9 +24,9 @@ export default function CallToAction({
         </Reveal>
         <Reveal
           delay={120}
-          className="flex flex-col gap-3 sm:flex-row lg:col-span-5 lg:justify-end"
+          className="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:col-span-5 lg:justify-end"
         >
-          <Button href="/contact">
+          <Button href={actionHref}>
             {actionLabel}
             <ArrowIcon />
           </Button>
