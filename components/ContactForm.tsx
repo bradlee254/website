@@ -33,8 +33,8 @@ const FIELD_ORDER: FieldName[] = [
   "service",
   "name",
   "phone",
-  "email",
   "location",
+  "email",
   "message",
 ];
 
@@ -43,8 +43,8 @@ function validate(form: FormState): FieldErrors {
   if (form.name.trim().length < 2) {
     errors.name = "Enter your full name so we know who to reply to.";
   }
-  if (!EMAIL_REGEX.test(form.email.trim())) {
-    errors.email = "Enter a valid email address, like you@example.com.";
+  if (form.email.trim() !== "" && !EMAIL_REGEX.test(form.email.trim())) {
+    errors.email = "Enter a valid email address, or leave this blank.";
   }
   if (!PHONE_REGEX.test(form.phone.trim())) {
     errors.phone = "Enter a phone number we can call you back on.";
@@ -151,8 +151,10 @@ export default function ContactForm() {
           title: "Lee Electronics",
           name: form.name.trim(),
           from_name: form.name.trim(),
-          from_email: form.email.trim(),
-          reply_to: form.email.trim(),
+          from_email: form.email.trim() || "Not provided",
+          // Email is optional; fall back to our own address so the template's
+          // reply-to field is never empty.
+          reply_to: form.email.trim() || site.email,
           from_phone: form.phone.trim(),
           from_location: form.location.trim(),
           from_service: form.service,
@@ -249,22 +251,21 @@ export default function ContactForm() {
             placeholder="+254 700 000 000"
           />
         </Field>
-        <Field id="email" label="Email" error={errors.email}>
-          <input
-            {...fieldProps("email")}
-            type="email"
-            required
-            autoComplete="email"
-            spellCheck={false}
-            placeholder="you@example.com"
-          />
-        </Field>
         <Field id="location" label="Location" optional error={errors.location}>
           <input
             {...fieldProps("location")}
             type="text"
             autoComplete="address-level2"
             placeholder="e.g. Westlands, Nairobi"
+          />
+        </Field>
+        <Field id="email" label="Email" optional error={errors.email}>
+          <input
+            {...fieldProps("email")}
+            type="email"
+            autoComplete="email"
+            spellCheck={false}
+            placeholder="you@example.com"
           />
         </Field>
         <Field
