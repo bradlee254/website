@@ -1,11 +1,15 @@
 import Reveal from "@/components/Reveal";
-import { processSteps } from "@/lib/services";
+import { processSteps, type Step } from "@/lib/services";
 
-/** The five steps from first contact to follow-up. */
-export default function ProcessSteps() {
+/** Numbered steps; defaults to the general process from first contact to handover. */
+export default function ProcessSteps({
+  steps = processSteps,
+}: {
+  steps?: Step[];
+}) {
   return (
     <ol className="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-5">
-      {processSteps.map((step, i) => (
+      {steps.map((step, i) => (
         <li key={step.title}>
           <Reveal
             delay={i * 80}

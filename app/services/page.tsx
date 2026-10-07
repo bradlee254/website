@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Check } from "lucide-react";
-import Button, { ArrowIcon } from "@/components/Button";
+import Button, { ArrowIcon, TextLink } from "@/components/Button";
 import CallToAction from "@/components/CallToAction";
 import PageHeader from "@/components/PageHeader";
 import ProcessSteps from "@/components/ProcessSteps";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
-import { quoteLink, services } from "@/lib/services";
+import { businessSolutions, quoteLink, services } from "@/lib/services";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -95,13 +95,46 @@ export default function ServicesPage() {
         </div>
       </section>
 
+      <section className="tone-dark section-y bg-ink text-paper">
+        <div className="container-site grid gap-x-12 gap-y-12 lg:grid-cols-12">
+          <Reveal className="lg:col-span-5">
+            <SectionHeading
+              tone="dark"
+              eyebrow="Business Solutions"
+              title="Keeping offices and shops running"
+              description="Need ongoing technical support for your business? One team covers your power, security and IT."
+            />
+            <Button href="/contact" className="mt-8">
+              Talk to LEE
+              <ArrowIcon />
+            </Button>
+          </Reveal>
+          <ul className="lg:col-span-6 lg:col-start-7">
+            {businessSolutions.map((item, i) => (
+              <li key={item.title}>
+                <Reveal
+                  delay={i * 80}
+                  className="grid gap-x-6 gap-y-1 border-t border-paper/20 py-6 sm:grid-cols-[7rem_1fr_auto] sm:items-baseline"
+                >
+                  <h3 className="type-heading">{item.title}</h3>
+                  <p className="text-base text-paper/70">{item.description}</p>
+                  <TextLink href={item.href} className="text-secondary">
+                    Details
+                  </TextLink>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       <section className="section-y bg-surface">
         <div className="container-site">
           <Reveal>
             <SectionHeading
               eyebrow="How It Works"
-              title="From first call to follow-up"
-              description="The same five steps, whatever the job."
+              title="From first call to handover"
+              description="You know what happens next at every step."
             />
           </Reveal>
           <div className="mt-14 lg:mt-16">
