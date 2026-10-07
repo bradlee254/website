@@ -1,245 +1,116 @@
-import type { LucideIcon } from "lucide-react";
 import { asset } from "@/lib/site";
-import {
-  Building2,
-  Cable,
-  Camera,
-  Cctv,
-  Cpu,
-  HardDrive,
-  Lightbulb,
-  PlugZap,
-  Search,
-  ShieldCheck,
-  Smartphone,
-  Wrench,
-} from "lucide-react";
 
-export type Service = {
-  title: string;
-  description: string;
-  icon: LucideIcon;
+export type Testimonial = {
+  quote: string;
+  /** Customer's name as they agreed to be shown, e.g. "Mary W." */
+  name?: string;
+  /** Short context, e.g. "Homeowner — Nairobi". */
+  detail?: string;
+  /** The kind of work the review is about. */
+  service: string;
+  rating: number;
 };
 
-export const electricalServices: Service[] = [
-  {
-    title: "Wiring & Installation",
-    description: "Professional wiring for homes and commercial buildings.",
-    icon: Cable,
-  },
-  {
-    title: "Lighting Solutions",
-    description: "Indoor and outdoor lighting installations.",
-    icon: Lightbulb,
-  },
-  {
-    title: "Power Outlets & Switches",
-    description: "Installation and replacement of outlets and switches.",
-    icon: PlugZap,
-  },
-  {
-    title: "Fault Finding & Repairs",
-    description: "Diagnose and repair electrical faults quickly and safely.",
-    icon: Search,
-  },
-  {
-    title: "Safety Inspections",
-    description: "Comprehensive electrical safety assessments.",
-    icon: ShieldCheck,
-  },
-];
-
-export const cctvServices: Service[] = [
-  {
-    title: "Home & Office CCTV Systems",
-    description: "Complete camera systems tailored to residential and commercial properties.",
-    icon: Building2,
-  },
-  {
-    title: "Camera Supply & Installation",
-    description: "Supply and professional installation of HD security cameras.",
-    icon: Camera,
-  },
-  {
-    title: "Remote Viewing Setup",
-    description: "Watch live footage from anywhere using your phone or computer.",
-    icon: Smartphone,
-  },
-  {
-    title: "Recording & Storage Setup",
-    description: "Reliable local and cloud recording so footage is there when you need it.",
-    icon: HardDrive,
-  },
-  {
-    title: "System Maintenance & Support",
-    description: "Ongoing checks, repairs and upgrades to keep your system online.",
-    icon: Wrench,
-  },
-];
-
-export const computerServices: Service[] = [
-  {
-    title: "PC & Laptop Repairs",
-    description: "Hardware diagnostics and repairs for all brands.",
-    icon: Cpu,
-  },
-  {
-    title: "Software Installation",
-    description: "Windows, Office, Antivirus and driver installations.",
-    icon: Smartphone,
-  },
-  {
-    title: "Virus & Malware Removal",
-    description: "Deep cleaning of infected computers.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "System Upgrades",
-    description: "RAM upgrades, SSD installation and performance tuning.",
-    icon: Wrench,
-  },
-  {
-    title: "Data Backup & Recovery",
-    description: "Recover lost files and protect your important data.",
-    icon: HardDrive,
-  },
-];
-
-export const featuredServices = [
-  {
-    title: "Electrical Services",
-    description:
-      "Wiring, lighting, outlets, fault finding and safety inspections for homes and businesses.",
-    image: asset("/images/photos/electrical-testing.jpg"),
-    items: [
-      "Wiring & Installation",
-      "Lighting Solutions",
-      "Power Outlets & Switches",
-      "Fault Finding & Repairs",
-      "Safety Inspections",
-      "CCTV Installation",
-    ],
-    href: "/services#electrical",
-    icon: Lightbulb,
-  },
-  {
-    title: "Computer Services",
-    description:
-      "Repairs, software installation, virus removal, upgrades and data recovery.",
-    image: asset("/images/photos/laptop-repair.jpg"),
-    items: [
-      "PC & Laptop Repairs",
-      "Software Installation",
-      "Virus & Malware Removal",
-      "System Upgrades",
-      "Data Backup & Recovery",
-    ],
-    href: "/services#computer",
-    icon: Cpu,
-  },
-  {
-    title: "CCTV Installation",
-    description:
-      "Security camera supply and installation for homes and businesses — clear viewing, reliable recording and remote access.",
-    image: asset("/images/photos/panel.png"),
-    items: [
-      "Home & Office CCTV Systems",
-      "Camera Supply & Installation",
-      "Remote Viewing Setup",
-      "Recording & Storage Setup",
-      "System Maintenance & Support",
-    ],
-    href: "/services#cctv",
-    icon: Cctv,
-  },
-];
-
-export const whyChooseUs = [
-  {
-    title: "Reliable Service",
-    description: "Always available to serve customers whenever you need us.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Quality Work",
-    description: "Professional workmanship using industry standards.",
-    icon: Wrench,
-  },
-  {
-    title: "Customer Satisfaction",
-    description: "We prioritize every client's needs and expectations.",
-    icon: Lightbulb,
-  },
-];
-
-export const testimonials = [
+// Add each customer's name and detail once you have their permission to
+// publish it. Reviews without a name are shown with the service only.
+export const testimonials: Testimonial[] = [
   {
     quote: "Excellent service. Fixed my laptop within one hour.",
-    name: "Customer Review",
-    role: "Computer Services",
+    service: "Computer Services",
     rating: 5,
   },
   {
     quote: "Very professional electrical installation for our office.",
-    name: "Customer Review",
-    role: "Electrical Services",
+    service: "Electrical Services",
     rating: 5,
   },
   {
     quote: "Quick fault finding and a fair price. Highly recommended.",
-    name: "Customer Review",
-    role: "Electrical Services",
+    service: "Electrical Services",
     rating: 5,
   },
   {
     quote: "They recovered all my lost documents after a drive failure.",
-    name: "Customer Review",
-    role: "Data Recovery",
+    service: "Data Recovery",
     rating: 5,
   },
 ];
 
-export const galleryItems = [
+export type GalleryItem = {
+  id: string;
+  src: string;
+  alt: string;
+  /** Filter tabs on the Our Work page are built from these categories. */
+  category: string;
+  label: string;
+  /** Optional one-line description of the job. */
+  description?: string;
+};
+
+// One entry per photo. New categories (for example "CCTV" or "Networking")
+// appear as filter tabs automatically once a photo uses them.
+export const galleryItems: GalleryItem[] = [
   {
-    id: "wiring-installation",
-    src: asset("/images/photos/panel.png"),
-    alt: "Professional electrical wiring installation",
-    category: "Electrical",
-    label: "Wiring Installation",
-  },
-  {
-    id: "lighting-installation",
-    src: asset("/images/photos/electrical-testing.jpg"),
-    alt: "Indoor lighting installation",
-    category: "Electrical",
-    label: "Lighting Installation",
+    id: "cctv-installation",
+    src: asset("/images/photos/cctv-installation.webp"),
+    alt: "Technician on a stepladder mounting a dome CCTV camera to an office ceiling",
+    category: "CCTV",
+    label: "CCTV Camera Installation",
   },
   {
     id: "distribution-board",
-    src: asset("/images/photos/fuse.png"),
-    alt: "Electrical distribution board",
+    src: asset("/images/photos/distribution-board.webp"),
+    alt: "Electrician in a hard hat and safety glasses working on a distribution board",
     category: "Electrical",
-    label: "Distribution Board",
+    label: "Distribution Board Installation",
+  },
+  {
+    id: "socket-installation",
+    src: asset("/images/photos/socket-installation.webp"),
+    alt: "Technician fitting a wall socket with an insulated screwdriver",
+    category: "Electrical",
+    label: "Socket & Switch Installation",
+  },
+  {
+    id: "network-cabinet",
+    src: asset("/images/photos/network-cabinet.webp"),
+    alt: "Technician connecting labelled network cables in a wall-mounted cabinet",
+    category: "Networking",
+    label: "Network Cabinet & Cabling",
+  },
+  {
+    id: "cctv-monitoring",
+    src: asset("/images/photos/cctv-monitoring.webp"),
+    alt: "Technician connecting a CCTV recorder beside a monitor showing four camera views",
+    category: "CCTV",
+    label: "Recorder & Monitoring Setup",
   },
   {
     id: "laptop-repair",
-    src: asset("/images/photos/laptop-repair.jpg"),
-    alt: "Laptop repair in progress",
-    category: "Computer",
+    src: asset("/images/photos/laptop-repair.webp"),
+    alt: "Laptop opened up on a workbench during a repair",
+    category: "IT & Computers",
     label: "Laptop Repair",
   },
   {
-    id: "desktop-repair",
-    src: asset("/images/photos/laptop-repair.jpg"),
-    alt: "Desktop computer repair",
-    category: "Computer",
-    label: "Desktop Repair",
+    id: "data-recovery",
+    src: asset("/images/photos/data-recovery.webp"),
+    alt: "Technician placing a hard drive into a drive dock beside a laptop",
+    category: "IT & Computers",
+    label: "Data Recovery",
   },
   {
-    id: "software-installation",
-    src: asset("/images/photos/electrical-testing.jpg"),
-    alt: "Software installation",
-    category: "Computer",
-    label: "Software Installation",
+    id: "distribution-board-wiring",
+    src: asset("/images/photos/panel.webp"),
+    alt: "LEE technician in uniform working on an electrical distribution board",
+    category: "Electrical",
+    label: "Distribution Board Wiring",
+  },
+  {
+    id: "distribution-board-service",
+    src: asset("/images/photos/fuse.webp"),
+    alt: "LEE electrician servicing a distribution board with an insulated screwdriver",
+    category: "Electrical",
+    label: "Distribution Board Servicing",
   },
 ];

@@ -6,9 +6,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight, Plus, X } from "lucide-react";
 import { galleryItems } from "@/lib/data";
 
-type Filter = "All" | "Electrical" | "Computer";
-
-const FILTERS: Filter[] = ["All", "Electrical", "Computer"];
+const ALL = "All";
 
 // One large lead tile per six; the rest fill a 3-column grid without gaps.
 const BENTO_SPANS = [
@@ -27,9 +25,9 @@ export default function GalleryGrid({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [filter, setFilter] = useState<Filter>(() => {
+  const [filter, setFilter] = useState(() => {
     const cat = searchParams.get("cat");
-    return cat === "Electrical" || cat === "Computer" ? cat : "All";
+    return galleryItems.some((item) => item.category === cat) ? cat! : ALL;
   });
   const [lightbox, setLightbox] = useState<number | null>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -43,18 +41,24 @@ export default function GalleryGrid({
     [showAll],
   );
 
+  // Filter tabs come from the categories that actually have photos.
+  const filters = useMemo(
+    () => [ALL, ...new Set(items.map((item) => item.category))],
+    [items],
+  );
+
   const visible = useMemo(
     () =>
-      filter === "All"
+      filter === ALL
         ? items
         : items.filter((item) => item.category === filter),
     [items, filter],
   );
 
-  function selectFilter(next: Filter) {
+  function selectFilter(next: string) {
     setFilter(next);
     const url = new URL(window.location.href);
-    if (next === "All") {
+    if (next === ALL) {
       url.searchParams.delete("cat");
     } else {
       url.searchParams.set("cat", next);
@@ -94,15 +98,15 @@ export default function GalleryGrid({
 
   return (
     <div>
-      {showAll && (
+      {showAll && filters.length > 2 && (
         <div
           role="group"
           aria-label="Filter projects by category"
           className="mb-10 flex gap-x-8 overflow-x-auto border-b border-line"
         >
-          {FILTERS.map((f) => {
+          {filters.map((f) => {
             const count =
-              f === "All"
+              f === ALL
                 ? items.length
                 : items.filter((item) => item.category === f).length;
             const active = filter === f;
@@ -138,7 +142,7 @@ export default function GalleryGrid({
           </p>
           <button
             type="button"
-            onClick={() => selectFilter("All")}
+            onClick={() => selectFilter(ALL)}
             className="link-underline mt-6 min-h-11 font-semibold text-primary"
           >
             View all projects
@@ -258,6 +262,11 @@ export default function GalleryGrid({
                 <span className="mt-1.5 block text-lg font-semibold tracking-tight">
                   {visible[lightbox].label}
                 </span>
+                {visible[lightbox].description && (
+                  <span className="mt-1 block max-w-xl text-[0.9375rem] text-paper/70">
+                    {visible[lightbox].description}
+                  </span>
+                )}
               </span>
               <span className="type-label shrink-0 text-paper/60" aria-live="polite">
                 {String(lightbox + 1).padStart(2, "0")} /{" "}

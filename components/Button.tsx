@@ -11,7 +11,7 @@ const variants = {
 } as const;
 
 const base =
-  "group/btn inline-flex min-h-12 items-center justify-center gap-2.5 rounded-sm px-6 py-3 text-[0.9375rem] font-semibold leading-tight tracking-tight transition-[background-color,border-color,color,transform] duration-200 active:scale-[0.98]";
+  "group/btn inline-flex min-h-12 items-center justify-center gap-2.5 whitespace-nowrap rounded-sm px-6 py-3 text-[0.9375rem] font-semibold leading-tight tracking-tight transition-[background-color,border-color,color,transform] duration-200 active:scale-[0.98]";
 
 export function buttonClass(
   variant: keyof typeof variants = "primary",

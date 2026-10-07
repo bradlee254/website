@@ -1,29 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import emailjs from "@emailjs/browser";
 import { Check, Loader2, Send } from "lucide-react";
 import { buttonClass } from "@/components/Button";
-import { site } from "@/lib/site";
+import { QUOTE_SERVICE_OPTIONS, getService } from "@/lib/services";
+import { site, whatsappLink } from "@/lib/site";
 
 const EMAILJS_SERVICE_ID = "service_50qapou";
 const EMAILJS_TEMPLATE_ID = "template_en1c078";
 const EMAILJS_PUBLIC_KEY = "-BsDadyzu1JUsZYdR";
-
-const SERVICE_OPTIONS = [
-  "Wiring & Installation",
-  "Lighting Solutions",
-  "Power Outlets & Switches",
-  "Fault Finding & Repairs",
-  "Safety Inspections",
-  "CCTV Installation",
-  "PC & Laptop Repairs",
-  "Software Installation",
-  "Virus & Malware Removal",
-  "System Upgrades",
-  "Data Backup & Recovery",
-  "Other",
-];
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_REGEX = /^[+()\-.\s\d]{7,20}$/;
@@ -32,6 +20,7 @@ const initialForm = {
   name: "",
   email: "",
   phone: "",
+  location: "",
   service: "",
   message: "",
 };
@@ -40,9 +29,15 @@ type FormState = typeof initialForm;
 type FieldName = keyof FormState;
 type FieldErrors = Partial<Record<FieldName, string>>;
 
-const FIELD_ORDER: FieldName[] = ["name", "email", "phone", "service", "message"];
+const FIELD_ORDER: FieldName[] = [
+  "service",
+  "name",
+  "phone",
+  "email",
+  "location",
+  "message",
+];
 
-// Same rules as app/api/contact/route.ts.
 function validate(form: FormState): FieldErrors {
   const errors: FieldErrors = {};
   if (form.name.trim().length < 2) {
@@ -51,14 +46,14 @@ function validate(form: FormState): FieldErrors {
   if (!EMAIL_REGEX.test(form.email.trim())) {
     errors.email = "Enter a valid email address, like you@example.com.";
   }
-  if (form.phone.trim() !== "" && !PHONE_REGEX.test(form.phone.trim())) {
-    errors.phone = "Enter a valid phone number, or leave this blank.";
+  if (!PHONE_REGEX.test(form.phone.trim())) {
+    errors.phone = "Enter a phone number we can call you back on.";
   }
-  if (!SERVICE_OPTIONS.includes(form.service)) {
+  if (!QUOTE_SERVICE_OPTIONS.includes(form.service)) {
     errors.service = "Choose the service you need.";
   }
   if (form.message.trim().length < 10) {
-    errors.message = "Describe the job in at least 10 characters.";
+    errors.message = "Describe the problem in at least 10 characters.";
   }
   return errors;
 }
@@ -103,7 +98,12 @@ function Field({
 }
 
 export default function ContactForm() {
-  const [form, setForm] = useState(initialForm);
+  const searchParams = useSearchParams();
+  // Service pages link here with ?service=<slug> to preselect the service.
+  const [form, setForm] = useState(() => ({
+    ...initialForm,
+    service: getService(searchParams.get("service") ?? "")?.name ?? "",
+  }));
   const [errors, setErrors] = useState<FieldErrors>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
@@ -154,8 +154,13 @@ export default function ContactForm() {
           from_email: form.email.trim(),
           reply_to: form.email.trim(),
           from_phone: form.phone.trim(),
+          from_location: form.location.trim(),
           from_service: form.service,
-          message: form.message.trim(),
+          // Location is repeated in the message so it shows even if the email
+          // template has no location field.
+          message: form.location.trim()
+            ? `${form.message.trim()}\n\nLocation: ${form.location.trim()}`
+            : form.message.trim(),
         },
         { publicKey: EMAILJS_PUBLIC_KEY },
       );
@@ -173,17 +178,17 @@ export default function ContactForm() {
         <span className="flex h-12 w-12 items-center justify-center rounded-sm bg-primary text-paper">
           <Check className="h-6 w-6" aria-hidden="true" />
         </span>
-        <h2 className="type-title mt-6 text-ink">Inquiry sent.</h2>
+        <h2 className="type-title mt-6 text-ink">Request sent.</h2>
         <p className="type-lead mt-4 max-w-md text-muted">
-          Thank you for reaching out. We have received your message and will
-          get back to you shortly.
+          Thank you for reaching out. We have received your request and will
+          get back to you shortly. For anything urgent, call {site.phone}.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
           className={buttonClass("outline", "mt-8")}
         >
-          Send another inquiry
+          Send another request
         </button>
       </div>
     );
@@ -193,12 +198,39 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate aria-busy={submitting}>
-      <h2 className="type-title text-ink">Send an inquiry</h2>
-      <p className="mt-3 text-muted">
-        Fill in the form and we will respond as soon as possible.
+      <h2 className="type-title text-ink">Request a free quote</h2>
+      <p className="mt-3 max-w-xl text-muted">
+        Tell us what you need and we will get back to you with a quotation.
+        Have photos of the problem?{" "}
+        <a
+          href={whatsappLink("Hello LEE, I would like a quote for ")}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-semibold text-primary underline underline-offset-4"
+        >
+          Send them on WhatsApp
+        </a>
+        .
       </p>
 
       <div className="mt-8 grid gap-x-5 gap-y-6 sm:grid-cols-2">
+        <Field
+          id="service"
+          label="What service do you need?"
+          error={errors.service}
+          className="sm:col-span-2"
+        >
+          <select {...fieldProps("service")} required>
+            <option value="" disabled>
+              Select a service
+            </option>
+            {QUOTE_SERVICE_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </Field>
         <Field id="name" label="Full name" error={errors.name}>
           <input
             {...fieldProps("name")}
@@ -206,6 +238,15 @@ export default function ContactForm() {
             required
             autoComplete="name"
             placeholder="John Doe"
+          />
+        </Field>
+        <Field id="phone" label="Phone number" error={errors.phone}>
+          <input
+            {...fieldProps("phone")}
+            type="tel"
+            required
+            autoComplete="tel"
+            placeholder="+254 700 000 000"
           />
         </Field>
         <Field id="email" label="Email" error={errors.email}>
@@ -218,37 +259,25 @@ export default function ContactForm() {
             placeholder="you@example.com"
           />
         </Field>
-        <Field id="phone" label="Phone number" optional error={errors.phone}>
+        <Field id="location" label="Location" optional error={errors.location}>
           <input
-            {...fieldProps("phone")}
-            type="tel"
-            autoComplete="tel"
-            placeholder="+254 700 000 000"
+            {...fieldProps("location")}
+            type="text"
+            autoComplete="address-level2"
+            placeholder="e.g. Westlands, Nairobi"
           />
-        </Field>
-        <Field id="service" label="Service needed" error={errors.service}>
-          <select {...fieldProps("service")} required>
-            <option value="" disabled>
-              Select a service
-            </option>
-            {SERVICE_OPTIONS.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
         </Field>
         <Field
           id="message"
-          label="Message"
+          label="Describe the problem"
           error={errors.message}
           className="sm:col-span-2"
         >
           <textarea
             {...fieldProps("message")}
-            rows={6}
+            rows={5}
             required
-            placeholder="Tell us about your project or problem…"
+            placeholder="What needs installing, fixing or checking?"
           />
         </Field>
       </div>
@@ -282,11 +311,18 @@ export default function ContactForm() {
           </>
         ) : (
           <>
-            Send inquiry
+            Request a free quote
             <Send className="h-4 w-4" aria-hidden="true" />
           </>
         )}
       </button>
+      <p className="mt-4 text-sm text-muted">
+        We use these details only to respond to your request. See our{" "}
+        <Link href="/privacy" className="underline underline-offset-4">
+          Privacy Policy
+        </Link>
+        .
+      </p>
     </form>
   );
 }

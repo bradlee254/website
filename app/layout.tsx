@@ -5,41 +5,78 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import MobileActionBar from "@/components/MobileActionBar";
+import JsonLd from "@/components/JsonLd";
 import { site } from "@/lib/site";
+
+const defaultTitle = `${site.name} | Electrical, CCTV & Computer Services in Nairobi`;
+const defaultDescription =
+  "LEE provides professional electrical, CCTV security, computer repair and IT services for homes and businesses in Nairobi.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | Professional Electrical & Computer Services`,
+    default: defaultTitle,
     template: `%s | ${site.name}`,
   },
-  description:
-    "Reliable, affordable and professional electrical installations, computer repairs, software support and maintenance services for homes and businesses.",
+  description: defaultDescription,
   keywords: [
-    "electrical services",
-    "computer repair",
-    "wiring installation",
-    "laptop repair",
-    "virus removal",
-    "software installation",
-    "electrical contractor",
-    "computer technician",
+    "electrician Nairobi",
+    "electrical services Nairobi",
+    "CCTV installation Nairobi",
+    "CCTV installer Nairobi",
+    "computer repair Nairobi",
+    "laptop repair Nairobi",
+    "IT support Nairobi",
+    "network installation Nairobi",
   ],
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: "en_KE",
     siteName: site.name,
-    title: `${site.name} | Professional Electrical & Computer Services`,
-    description:
-      "Reliable, affordable and professional electrical and computer services for homes and businesses.",
+    title: defaultTitle,
+    description: defaultDescription,
     url: site.url,
   },
   twitter: {
-    card: "summary",
-    title: `${site.name} | Professional Electrical & Computer Services`,
-    description:
-      "Reliable, affordable and professional electrical and computer services for homes and businesses.",
+    card: "summary_large_image",
+    title: defaultTitle,
+    description: defaultDescription,
   },
+};
+
+// Describes the business to search engines. Only facts that are published
+// elsewhere on the site belong here.
+const businessJsonLd = {
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "Electrician"],
+  "@id": `${site.url}/#business`,
+  name: site.name,
+  description: defaultDescription,
+  url: site.url,
+  telephone: site.phone.replace(/\s/g, ""),
+  email: site.email,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Nairobi",
+    addressCountry: "KE",
+  },
+  areaServed: { "@type": "City", name: "Nairobi" },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      opens: "08:00",
+      closes: "18:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Saturday",
+      opens: "09:00",
+      closes: "16:00",
+    },
+  ],
 };
 
 const archivo = Archivo({
@@ -72,7 +109,7 @@ export default function RootLayout({
       lang="en"
       className={`${archivo.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-svh flex-col">
+      <body className="flex min-h-svh flex-col pb-[calc(3.5rem+env(safe-area-inset-bottom))] md:pb-0">
         {/* Without JavaScript the scroll reveals never fire, so show content. */}
         <noscript>
           <style>{`.reveal{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>
@@ -84,11 +121,13 @@ export default function RootLayout({
           Skip to main content
         </a>
         <Navbar />
-        <main id="main" className="flex-1">
+        <main id="main" className="flex flex-1 flex-col">
           {children}
         </main>
         <Footer />
         <WhatsAppButton />
+        <MobileActionBar />
+        <JsonLd data={businessJsonLd} />
         <SmoothScroll />
       </body>
     </html>

@@ -1,14 +1,14 @@
 import { MessageCircle } from "lucide-react";
-import { site } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
 
 export default function WhatsAppButton() {
   return (
     <a
-      href={site.whatsappHref}
+      href={whatsappLink("Hello LEE, I need help with ")}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
-      className="group fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-40 flex h-14 items-center rounded-full bg-[#1fa855] text-white shadow-lg shadow-ink/25 transition-[background-color,transform] duration-200 hover:bg-[#178a45] active:scale-95"
+      className="group fixed hidden md:flex bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] z-40 h-14 items-center rounded-full bg-[#1fa855] text-white shadow-lg shadow-ink/25 transition-[background-color,transform] duration-200 hover:bg-[#178a45] active:scale-95"
     >
       <span className="flex h-14 w-14 items-center justify-center">
         <MessageCircle className="h-6 w-6" aria-hidden="true" />

@@ -3,17 +3,18 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, Phone, X, Zap } from "lucide-react";
+import { Menu, MessageCircle, Phone, X, Zap } from "lucide-react";
 import { buttonClass } from "@/components/Button";
-import { site } from "@/lib/site";
+import { site, whatsappLink } from "@/lib/site";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
   { href: "/services", label: "Services" },
-  { href: "/gallery", label: "Gallery" },
+  { href: "/about", label: "About" },
+  { href: "/gallery", label: "Our Work" },
+  // Enable once the reviews carry real customer names.
   // { href: "/testimonials", label: "Testimonials" },
-  { href: "/contact", label: "Contact Us" },
+  { href: "/contact", label: "Contact" },
 ];
 
 function isActive(pathname: string, href: string) {
@@ -103,15 +104,22 @@ export default function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2">
-          {/* Calling is the main action, so it stays reachable on phones as an icon. */}
+          {/* Phones use the bottom action bar for these instead. */}
           <a
-            href={site.phoneHref}
-            aria-label={`Call ${site.phone}`}
-            className="inline-flex h-11 w-11 shrink-0 items-center justify-center gap-2.5 rounded-sm bg-secondary text-[0.9375rem] font-semibold tracking-tight text-ink transition-colors duration-200 hover:bg-paper sm:w-auto sm:px-5"
+            href={whatsappLink("Hello LEE, I need help with ")}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chat with us on WhatsApp"
+            className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-paper/25 text-paper transition-colors duration-200 hover:border-paper hover:bg-paper/5 md:inline-flex"
           >
-            <Phone className="h-4 w-4 shrink-0" aria-hidden="true" />
-            <span className="hidden sm:inline">Call now</span>
+            <MessageCircle className="h-5 w-5" aria-hidden="true" />
           </a>
+          <Link
+            href="/contact"
+            className="hidden h-11 shrink-0 items-center justify-center rounded-sm bg-secondary px-5 text-[0.9375rem] font-semibold tracking-tight text-ink transition-colors duration-200 hover:bg-paper md:inline-flex"
+          >
+            Get a free quote
+          </Link>
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -135,7 +143,7 @@ export default function Navbar() {
           data-lenis-prevent
           className="animate-fade-in fixed inset-x-0 bottom-0 top-(--header-h) overflow-y-auto border-t border-paper/10 bg-ink lg:hidden"
         >
-          <div className="container-site flex min-h-full flex-col justify-between gap-12 pb-10 pt-6">
+          <div className="container-site flex min-h-full flex-col justify-between gap-12 pb-24 pt-6">
             <ul>
               {navLinks.map((link, i) => {
                 const active = isActive(pathname, link.href);

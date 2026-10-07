@@ -3,13 +3,15 @@ import { Star } from "lucide-react";
 export default function TestimonialCard({
   quote,
   name,
-  role,
+  detail,
+  service,
   rating,
   tone = "light",
 }: {
   quote: string;
-  name: string;
-  role: string;
+  name?: string;
+  detail?: string;
+  service: string;
   rating: number;
   /** "dark" when the card sits on an ink background. */
   tone?: "light" | "dark";
@@ -42,17 +44,25 @@ export default function TestimonialCard({
         “{quote}”
       </blockquote>
       <figcaption className="mt-8">
-        <p
-          className={`text-[0.9375rem] font-semibold ${
-            dark ? "text-paper" : "text-ink"
-          }`}
-        >
-          {name}
-        </p>
-        <p
-          className={`type-label mt-1.5 ${dark ? "text-paper/55" : "text-muted"}`}
-        >
-          {role}
+        {name && (
+          <p
+            className={`mb-1.5 text-[0.9375rem] font-semibold ${
+              dark ? "text-paper" : "text-ink"
+            }`}
+          >
+            {name}
+            {detail && (
+              <span
+                className={`font-normal ${dark ? "text-paper/65" : "text-muted"}`}
+              >
+                {" "}
+                — {detail}
+              </span>
+            )}
+          </p>
+        )}
+        <p className={`type-label ${dark ? "text-paper/55" : "text-muted"}`}>
+          {service}
         </p>
       </figcaption>
     </figure>
