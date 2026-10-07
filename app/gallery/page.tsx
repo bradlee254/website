@@ -6,17 +6,18 @@ import PageHeader from "@/components/PageHeader";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Gallery",
-  description: `Browse completed projects by ${site.name} — electrical wiring, lighting installations and computer repairs.`,
+  title: "Our Work",
+  description: `See some of the electrical, CCTV and IT work carried out by ${site.name} in Nairobi.`,
+  alternates: { canonical: "/gallery" },
 };
 
 export default function GalleryPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Our Gallery"
+        eyebrow="Our Work"
         title="Recent work, up close."
-        description="A look at some of the projects we have completed. Click any image to enlarge it."
+        description="A look at the kind of electrical, CCTV and IT work we do. Click any image to enlarge it."
       />
 
       <section className="section-y">
