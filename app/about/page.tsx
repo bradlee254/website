@@ -3,14 +3,15 @@ import Image from "next/image";
 import { TextLink } from "@/components/Button";
 import CallToAction from "@/components/CallToAction";
 import PageHeader from "@/components/PageHeader";
-import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
+import WhyChooseList from "@/components/WhyChooseList";
 import { site, asset } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Us",
-  description: `Learn about ${site.name} — our mission, vision and core values.`,
+  description: `About ${site.name}: a Nairobi team providing electrical, CCTV and computer services — our mission, vision and values.`,
+  alternates: { canonical: "/about" },
 };
 
 const coreValues = [
@@ -37,34 +38,34 @@ export default function AboutPage() {
     <>
       <PageHeader
         eyebrow="About Us"
-        title="Your trusted electrical & computer partner."
+        title="The team behind the work."
         description="Who we are, what we believe in, and why customers trust us."
       />
 
       <section className="section-y">
         <div className="container-site grid gap-x-12 gap-y-12 lg:grid-cols-12 lg:items-center">
           <Reveal variant="clip" className="lg:col-span-5">
-            <Parallax className="aspect-[4/5] rounded-sm bg-surface sm:aspect-[16/10] lg:aspect-[4/5]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-surface sm:aspect-[16/10] lg:aspect-[4/5]">
               <Image
-                src={asset("/images/photos/panel.png")}
+                src={asset("/images/photos/panel.webp")}
                 alt="LEE technician in uniform working on an electrical distribution board"
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-cover object-top"
               />
-            </Parallax>
+            </div>
           </Reveal>
           <Reveal delay={120} className="lg:col-span-6 lg:col-start-7">
             <SectionHeading
               eyebrow="Who We Are"
-              title="Electrical and computer services, under one roof"
+              title="Electrical, security and technology, under one roof"
             />
             <div className="mt-7 max-w-xl space-y-5 text-muted">
               <p className="type-lead text-ink">
                 {site.name} is a professional service provider specializing in
-                electrical installations, maintenance, and computer support
-                services for homes, businesses, offices, schools and
-                institutions.
+                electrical installations, CCTV security and computer support
+                for homes, businesses, offices, schools and institutions across{" "}
+                {site.serviceArea}.
               </p>
               <p>
                 Our mission is to provide reliable, safe, and affordable
@@ -121,6 +122,22 @@ export default function AboutPage() {
               </ol>
             </div>
           </Reveal>
+        </div>
+      </section>
+
+      <section className="section-y">
+        <div className="container-site grid gap-x-12 gap-y-12 lg:grid-cols-12">
+          <Reveal className="lg:col-span-4">
+            <div className="lg:sticky lg:top-28">
+              <SectionHeading
+                eyebrow="Why Choose LEE"
+                title="What you can expect from us"
+              />
+            </div>
+          </Reveal>
+          <div className="lg:col-span-8">
+            <WhyChooseList />
+          </div>
         </div>
       </section>
 

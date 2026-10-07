@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { TextLink } from "@/components/Button";
 import CallToAction from "@/components/CallToAction";
 import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
@@ -8,7 +9,8 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Testimonials",
-  description: `Read what customers say about ${site.name} electrical and computer services.`,
+  description: `Read what customers say about ${site.name} electrical, CCTV and computer services.`,
+  alternates: { canonical: "/testimonials" },
 };
 
 export default function TestimonialsPage() {
@@ -16,7 +18,7 @@ export default function TestimonialsPage() {
     <>
       <PageHeader
         eyebrow="Testimonials"
-        title="What our clients say."
+        title="What our customers say."
         description="What our customers say about the quality of our work."
       />
 
@@ -32,11 +34,16 @@ export default function TestimonialsPage() {
           ) : (
             <div className="grid gap-x-12 gap-y-14 md:grid-cols-2">
               {testimonials.map((t, i) => (
-                <Reveal key={`${t.name}-${i}`} delay={(i % 2) * 100}>
+                <Reveal key={t.quote} delay={(i % 2) * 100}>
                   <TestimonialCard {...t} />
                 </Reveal>
               ))}
             </div>
+          )}
+          {site.googleReviewsUrl && (
+            <TextLink href={site.googleReviewsUrl} className="mt-14 text-primary">
+              View all Google reviews
+            </TextLink>
           )}
         </div>
       </section>
