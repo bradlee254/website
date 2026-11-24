@@ -58,6 +58,13 @@ export const galleryItems: GalleryItem[] = [
     label: "CCTV Camera Installation",
   },
   {
+    id: "cctv-ceiling-camera",
+    src: asset("/images/photos/cctv-camera-installation.jpeg"),
+    alt: "Dome CCTV camera installed at the corner of a ceiling with exposed cable trunking",
+    category: "CCTV",
+    label: "Dome CCTV Camera Installation",
+  },
+  {
     id: "distribution-board",
     src: asset("/images/photos/distribution-board.webp"),
     alt: "Electrician in a hard hat and safety glasses working on a distribution board",
