@@ -57,7 +57,7 @@ export default async function ServicePage({ params }: Props) {
           </Button>
           <Button
             href={whatsappLink(
-              `Hello LEE, I need help with ${service.name.toLowerCase()}: `,
+              `Hello ${site.shortName}, I need help with ${service.name.toLowerCase()}: `,
             )}
             variant="outline"
           >
@@ -195,7 +195,7 @@ export default async function ServicePage({ params }: Props) {
         <div className="container-site grid gap-x-12 gap-y-12 lg:grid-cols-12">
           <Reveal className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
-              <SectionHeading eyebrow="Why Choose LEE" title="Why customers pick us" />
+              <SectionHeading eyebrow={`Why Choose ${site.shortName}`} title="Why customers pick us" />
             </div>
           </Reveal>
           <div className="lg:col-span-8">

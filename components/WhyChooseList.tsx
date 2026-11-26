@@ -1,11 +1,11 @@
 import Reveal from "@/components/Reveal";
-import { whyChooseLee } from "@/lib/services";
+import { whyChoose } from "@/lib/services";
 
-/** Numbered reasons to choose LEE. */
+/** Numbered reasons to choose us. */
 export default function WhyChooseList() {
   return (
     <ol>
-      {whyChooseLee.map((reason, i) => (
+      {whyChoose.map((reason, i) => (
         <li key={reason.title}>
           <Reveal
             delay={i * 70}

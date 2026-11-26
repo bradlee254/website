@@ -74,10 +74,10 @@ export default function Navbar() {
           </span>
           <span className="leading-none">
             <span className="block text-xl font-extrabold tracking-tight [font-stretch:122%]">
-              LEE
+              {site.shortName}
             </span>
             <span className="mt-1 block font-mono text-[0.5625rem] font-medium uppercase tracking-[0.1em] text-paper/65 min-[360px]:text-[0.625rem] min-[360px]:tracking-[0.14em]">
-              Electrical & CCTV services
+              Solutions · Electrical & CCTV
             </span>
           </span>
         </Link>
@@ -106,7 +106,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           {/* Phones use the bottom action bar for these instead. */}
           <a
-            href={whatsappLink("Hello LEE, I need help with ")}
+            href={whatsappLink(`Hello ${site.shortName}, I need help with `)}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat with us on WhatsApp"

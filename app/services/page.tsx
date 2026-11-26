@@ -106,7 +106,7 @@ export default function ServicesPage() {
               description="Need ongoing technical support for your business? One team covers your power, security and IT."
             />
             <Button href="/contact" className="mt-8">
-              Talk to LEE
+              Talk to {site.shortName}
               <ArrowIcon />
             </Button>
           </Reveal>

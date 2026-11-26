@@ -109,14 +109,14 @@ export const galleryItems: GalleryItem[] = [
   {
     id: "distribution-board-wiring",
     src: asset("/images/photos/panel.webp"),
-    alt: "LEE technician in uniform working on an electrical distribution board",
+    alt: "Our technician in uniform working on an electrical distribution board",
     category: "Electrical",
     label: "Distribution Board Wiring",
   },
   {
     id: "distribution-board-service",
     src: asset("/images/photos/fuse.webp"),
-    alt: "LEE electrician servicing a distribution board with an insulated screwdriver",
+    alt: "Our electrician servicing a distribution board with an insulated screwdriver",
     category: "Electrical",
     label: "Distribution Board Servicing",
   },

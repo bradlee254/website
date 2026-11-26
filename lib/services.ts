@@ -436,7 +436,7 @@ export function quoteLink(slug?: string): string {
   return slug ? `/contact?service=${slug}` : "/contact";
 }
 
-export const whyChooseLee = [
+export const whyChoose = [
   {
     title: "One Team, Multiple Skills",
     description: "Electrical, CCTV and computer expertise under one roof.",

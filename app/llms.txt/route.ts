@@ -16,7 +16,7 @@ export function GET() {
     `> ${site.description}`,
     "",
     `Service area: ${site.serviceArea}. Hours: ${hours}.`,
-    `Phone and WhatsApp: ${site.phone}. Email: ${site.email}. Free quotes on request.`,
+    `Phone and WhatsApp: ${site.phone}. Also: ${site.altPhone}. Email: ${site.email}. Free quotes on request.`,
     "",
     "## Services",
     "",

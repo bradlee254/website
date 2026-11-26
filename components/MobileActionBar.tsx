@@ -5,7 +5,7 @@ import { site, whatsappLink } from "@/lib/site";
 const itemClass =
   "flex min-h-14 flex-1 flex-col items-center justify-center gap-1 text-xs font-semibold tracking-tight";
 
-/** Phone-only bar that keeps the three ways to reach LEE one tap away. */
+/** Phone-only bar that keeps the three ways to reach us one tap away. */
 export default function MobileActionBar() {
   return (
     <nav
@@ -21,7 +21,7 @@ export default function MobileActionBar() {
         </li>
         <li className="flex flex-1">
           <a
-            href={whatsappLink("Hello LEE, I need help with ")}
+            href={whatsappLink(`Hello ${site.shortName}, I need help with `)}
             target="_blank"
             rel="noopener noreferrer"
             className={itemClass}

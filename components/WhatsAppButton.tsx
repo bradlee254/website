@@ -1,10 +1,10 @@
 import { MessageCircle } from "lucide-react";
-import { whatsappLink } from "@/lib/site";
+import { site, whatsappLink } from "@/lib/site";
 
 export default function WhatsAppButton() {
   return (
     <a
-      href={whatsappLink("Hello LEE, I need help with ")}
+      href={whatsappLink(`Hello ${site.shortName}, I need help with `)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"

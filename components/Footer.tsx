@@ -32,10 +32,10 @@ export default function Footer() {
               </span>
               <span className="leading-none">
                 <span className="block text-xl font-extrabold tracking-tight [font-stretch:122%]">
-                  LEE
+                  {site.shortName}
                 </span>
                 <span className="mt-1 block font-mono text-[0.5625rem] font-medium uppercase tracking-[0.1em] text-paper/65 min-[360px]:text-[0.625rem] min-[360px]:tracking-[0.14em]">
-                  Electrical & Computer Services
+                  Solutions · Electrical & Computer
                 </span>
               </span>
             </Link>
@@ -51,10 +51,19 @@ export default function Footer() {
             >
               {site.phone}
             </a>
+            <p className="mt-2 text-[0.9375rem] text-paper/65">
+              or{" "}
+              <a
+                href={site.altPhoneHref}
+                className="font-semibold text-paper/90 transition-colors hover:text-secondary"
+              >
+                {site.altPhone}
+              </a>
+            </p>
             <ul className="mt-3 flex flex-wrap gap-x-6">
               <li>
                 <a
-                  href={whatsappLink("Hello LEE, I need help with ")}
+                  href={whatsappLink(`Hello ${site.shortName}, I need help with `)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={linkClass}

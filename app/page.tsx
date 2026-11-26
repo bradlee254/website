@@ -80,7 +80,7 @@ export default function Home() {
                   <ArrowIcon />
                 </Button>
                 <Button
-                  href={whatsappLink("Hello LEE, I need help with ")}
+                  href={whatsappLink(`Hello ${site.shortName}, I need help with `)}
                   variant="outline"
                 >
                   <MessageCircle className="h-4 w-4" aria-hidden="true" />
@@ -232,7 +232,7 @@ export default function Home() {
           <Reveal className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
               <SectionHeading
-                eyebrow="Why Choose LEE"
+                eyebrow={`Why Choose ${site.shortName}`}
                 title="Reasons that hold up on the job"
               />
             </div>

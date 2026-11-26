@@ -148,7 +148,7 @@ export default function ContactForm() {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
-          title: "Lee Electronics",
+          title: site.name,
           name: form.name.trim(),
           from_name: form.name.trim(),
           from_email: form.email.trim() || "Not provided",
@@ -205,7 +205,7 @@ export default function ContactForm() {
         Tell us what you need and we will get back to you with a quotation.
         Have photos of the problem?{" "}
         <a
-          href={whatsappLink("Hello LEE, I would like a quote for ")}
+          href={whatsappLink(`Hello ${site.shortName}, I would like a quote for `)}
           target="_blank"
           rel="noopener noreferrer"
           className="font-semibold text-primary underline underline-offset-4"

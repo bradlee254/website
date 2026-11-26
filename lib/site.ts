@@ -1,12 +1,17 @@
 export const site = {
   // The one business name used everywhere on the site.
-  name: "LEE Electrical & Computer Services",
+  name: "Bashir Solutions",
+  // Short form for the logo wordmark, greetings and headings.
+  shortName: "Bashir",
   tagline: "Power. Security. Technology. Done Right.",
   description:
     "Professional electrical, CCTV and computer services for homes and businesses across Nairobi.",
   url: "https://www.bashirsolutions.co.ke",
   phone: "+254 708 657 832",
   phoneHref: "tel:+254708657832",
+  // Second line, also listed on the Google Business Profile.
+  altPhone: "+254 114 631 906",
+  altPhoneHref: "tel:+254114631906",
   whatsapp: "+254 708 657 832",
   whatsappHref: "https://wa.me/254708657832",
   email: "leebrad341@gmail.com",
@@ -20,11 +25,8 @@ export const site = {
   // Facebook, Instagram, LinkedIn…). Search engines use these to confirm the
   // business is real. Add only profiles that exist.
   sameAs: [] as string[],
-  hours: [
-    { day: "Monday – Friday", time: "8:00 AM – 6:00 PM" },
-    { day: "Saturday", time: "9:00 AM – 4:00 PM" },
-    { day: "Sunday", time: "Closed" },
-  ],
+  // Keep in step with the Google Business Profile hours.
+  hours: [{ day: "Monday – Sunday", time: "8:00 AM – 6:00 PM" }],
   mapEmbed:
     "https://maps.google.com/maps?q=Nairobi%2C%20Kenya&z=11&output=embed",
   mapLink: "https://maps.google.com/?q=Nairobi%2C%20Kenya",

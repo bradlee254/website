@@ -49,7 +49,7 @@ export default function AboutPage() {
             <div className="relative aspect-[4/5] overflow-hidden rounded-sm bg-surface sm:aspect-[16/10] lg:aspect-[4/5]">
               <Image
                 src={asset("/images/photos/panel.webp")}
-                alt="LEE technician in uniform working on an electrical distribution board"
+                alt="Our technician in uniform working on an electrical distribution board"
                 fill
                 sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-cover object-top"
@@ -131,7 +131,7 @@ export default function AboutPage() {
           <Reveal className="lg:col-span-4">
             <div className="lg:sticky lg:top-28">
               <SectionHeading
-                eyebrow="Why Choose LEE"
+                eyebrow={`Why Choose ${site.shortName}`}
                 title="What you can expect from us"
               />
             </div>

@@ -40,7 +40,7 @@ export default function OpenGraphImage() {
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: 44, fontWeight: 800, letterSpacing: -1 }}>
-              LEE
+              {site.name}
             </div>
             <div style={{ fontSize: 22, opacity: 0.7, letterSpacing: 4 }}>
               ELECTRICAL & COMPUTER SERVICES

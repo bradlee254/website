@@ -11,7 +11,7 @@ import { site } from "@/lib/site";
 
 const defaultTitle = `${site.name} | Electrical, CCTV & Computer Services in Nairobi`;
 const defaultDescription =
-  "LEE provides professional electrical, CCTV security, computer repair and IT services for homes and businesses in Nairobi.";
+  `${site.name} provides professional electrical, CCTV security, computer repair and IT services for homes and businesses in Nairobi.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -69,6 +69,12 @@ const businessJsonLd = {
   image: `${site.url}/opengraph-image`,
   ...(profileLinks.length > 0 && { sameAs: profileLinks }),
   telephone: site.phone.replace(/\s/g, ""),
+  contactPoint: [site.phone, site.altPhone].map((phone) => ({
+    "@type": "ContactPoint",
+    telephone: phone.replace(/\s/g, ""),
+    contactType: "customer service",
+    areaServed: "KE",
+  })),
   email: site.email,
   address: {
     "@type": "PostalAddress",
@@ -79,15 +85,17 @@ const businessJsonLd = {
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
       opens: "08:00",
       closes: "18:00",
-    },
-    {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: "Saturday",
-      opens: "09:00",
-      closes: "16:00",
     },
   ],
 };

@@ -16,7 +16,7 @@ const sections: LegalSection[] = [
   {
     heading: "Who we are",
     paragraphs: [
-      `${site.name} ("LEE", "we", "us") provides electrical, CCTV and computer services in ${site.serviceArea}. This policy explains what personal information we collect through this website and how we use it, in line with Kenya's Data Protection Act, 2019.`,
+      `${site.name} ("we", "us") provides electrical, CCTV and computer services in ${site.serviceArea}. This policy explains what personal information we collect through this website and how we use it, in line with Kenya's Data Protection Act, 2019.`,
     ],
   },
   {
