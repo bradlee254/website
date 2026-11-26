@@ -31,6 +31,11 @@ export const metadata: Metadata = {
     "network installation Nairobi",
   ],
   alternates: { canonical: "/" },
+  // Google Search Console "HTML tag" verification. Set the token from Search Console
+  // in NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION (not needed if verifying by DNS).
+  ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && {
+    verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
+  }),
   openGraph: {
     type: "website",
     locale: "en_KE",
@@ -46,6 +51,11 @@ export const metadata: Metadata = {
   },
 };
 
+const profileLinks = [
+  ...site.sameAs,
+  ...(site.googleReviewsUrl ? [site.googleReviewsUrl] : []),
+];
+
 // Describes the business to search engines. Only facts that are published
 // elsewhere on the site belong here.
 const businessJsonLd = {
@@ -55,6 +65,9 @@ const businessJsonLd = {
   name: site.name,
   description: defaultDescription,
   url: site.url,
+  logo: `${site.url}/apple-icon.png`,
+  image: `${site.url}/opengraph-image`,
+  ...(profileLinks.length > 0 && { sameAs: profileLinks }),
   telephone: site.phone.replace(/\s/g, ""),
   email: site.email,
   address: {

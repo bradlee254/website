@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import LegalDocument, { type LegalSection } from "@/components/LegalDocument";
 import PageHeader from "@/components/PageHeader";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy",
   description: `How ${site.name} collects, uses and protects the personal information you share through this website.`,
-  alternates: { canonical: "/privacy" },
-};
+  path: "/privacy",
+});
 
 // Review with a qualified adviser before relying on this text; it describes how
 // the website works today and must be kept in step with any changes.

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import Button, { ArrowIcon, TextLink } from "@/components/Button";
@@ -10,11 +11,11 @@ import SectionHeading from "@/components/SectionHeading";
 import { businessSolutions, quoteLink, services } from "@/lib/services";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Electrical, CCTV & Computer Services in Nairobi",
   description: `All services from ${site.name}: electrical installation and repairs, CCTV and security systems, computer repair, networking and data recovery in Nairobi.`,
-  alternates: { canonical: "/services" },
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import { TextLink } from "@/components/Button";
 import CallToAction from "@/components/CallToAction";
@@ -8,11 +9,11 @@ import SectionHeading from "@/components/SectionHeading";
 import WhyChooseList from "@/components/WhyChooseList";
 import { site, asset } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Us",
   description: `About ${site.name}: a Nairobi team providing electrical, CCTV and computer services — our mission, vision and values.`,
-  alternates: { canonical: "/about" },
-};
+  path: "/about",
+});
 
 const coreValues = [
   "Integrity",

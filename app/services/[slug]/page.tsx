@@ -13,6 +13,7 @@ import Reveal from "@/components/Reveal";
 import SectionHeading from "@/components/SectionHeading";
 import WhyChooseList from "@/components/WhyChooseList";
 import { getService, quoteLink, services } from "@/lib/services";
+import { pageMetadata } from "@/lib/seo";
 import { site, whatsappLink } from "@/lib/site";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -28,11 +29,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const service = getService(slug);
   if (!service) return {};
-  return {
+  return pageMetadata({
     title: service.seo.title,
     description: service.seo.description,
-    alternates: { canonical: `/services/${service.slug}` },
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServicePage({ params }: Props) {
@@ -256,6 +257,27 @@ export default async function ServicePage({ params }: Props) {
           url: `${site.url}/services/${service.slug}`,
           areaServed: { "@type": "City", name: "Nairobi" },
           provider: { "@id": `${site.url}/#business` },
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: site.url },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Services",
+              item: `${site.url}/services`,
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: service.name,
+              item: `${site.url}/services/${service.slug}`,
+            },
+          ],
         }}
       />
     </>

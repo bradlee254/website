@@ -4,7 +4,7 @@ export const site = {
   tagline: "Power. Security. Technology. Done Right.",
   description:
     "Professional electrical, CCTV and computer services for homes and businesses across Nairobi.",
-  url: "https://lee-electrical.example.com",
+  url: "https://www.bashirsolutions.co.ke",
   phone: "+254 708 657 832",
   phoneHref: "tel:+254708657832",
   whatsapp: "+254 708 657 832",
@@ -16,6 +16,10 @@ export const site = {
   serviceArea: "Nairobi and surrounding areas",
   // Link to the Google Business Profile reviews. Leave empty to hide the link.
   googleReviewsUrl: "",
+  // Official profiles of this business elsewhere (Google Business Profile,
+  // Facebook, Instagram, LinkedIn…). Search engines use these to confirm the
+  // business is real. Add only profiles that exist.
+  sameAs: [] as string[],
   hours: [
     { day: "Monday – Friday", time: "8:00 AM – 6:00 PM" },
     { day: "Saturday", time: "9:00 AM – 4:00 PM" },

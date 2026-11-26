@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Suspense } from "react";
 import { ArrowUpRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
@@ -6,11 +7,11 @@ import PageHeader from "@/components/PageHeader";
 import Reveal from "@/components/Reveal";
 import { site, whatsappLink } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact Us",
   description: `Request a free quote from ${site.name} for electrical, CCTV and computer services in Nairobi. Call, WhatsApp, email or use the form.`,
-  alternates: { canonical: "/contact" },
-};
+  path: "/contact",
+});
 
 const contactMethods = [
   {

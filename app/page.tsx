@@ -52,14 +52,19 @@ export default function Home() {
       <section className="tone-dark overflow-hidden bg-ink text-paper">
         <div className="container-site grid gap-x-12 gap-y-12 pb-14 pt-12 sm:pt-16 lg:grid-cols-12 lg:items-center lg:pb-20 lg:pt-20">
           <div className="lg:col-span-7">
-            <p className="type-label animate-fade-up flex items-center gap-3 text-secondary">
-              <span aria-hidden="true" className="h-px w-8 shrink-0 bg-current" />
-              {site.name}
-            </p>
-            <h1 className="type-display mt-6 max-w-[13ch]">
-              <SplitText text="Power. Security. Technology." />
-              <span className="text-secondary">
-                <SplitText text="Done Right." offset={3} />
+            {/* The small line is part of the h1 so the page's main heading says
+                what we do and where, not only the slogan. */}
+            <h1>
+              <span className="type-label animate-fade-up flex items-center gap-3 text-secondary">
+                <span aria-hidden="true" className="h-px w-8 shrink-0 bg-current" />
+                Electrical, CCTV &amp; IT services in Nairobi
+                <span className="sr-only">: </span>
+              </span>
+              <span className="type-display mt-6 block max-w-[13ch]">
+                <SplitText text="Power. Security. Technology." />
+                <span className="text-secondary">
+                  <SplitText text="Done Right." offset={3} />
+                </span>
               </span>
             </h1>
             <div

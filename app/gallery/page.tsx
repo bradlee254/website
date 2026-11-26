@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Suspense } from "react";
 import CallToAction from "@/components/CallToAction";
 import GalleryGrid from "@/components/GalleryGrid";
 import PageHeader from "@/components/PageHeader";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Our Work",
   description: `See some of the electrical, CCTV and IT work carried out by ${site.name} in Nairobi.`,
-  alternates: { canonical: "/gallery" },
-};
+  path: "/gallery",
+});
 
 export default function GalleryPage() {
   return (

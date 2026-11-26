@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { TextLink } from "@/components/Button";
 import CallToAction from "@/components/CallToAction";
 import PageHeader from "@/components/PageHeader";
@@ -7,11 +8,11 @@ import TestimonialCard from "@/components/TestimonialCard";
 import { testimonials } from "@/lib/data";
 import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Testimonials",
   description: `Read what customers say about ${site.name} electrical, CCTV and computer services.`,
-  alternates: { canonical: "/testimonials" },
-};
+  path: "/testimonials",
+});
 
 export default function TestimonialsPage() {
   return (
